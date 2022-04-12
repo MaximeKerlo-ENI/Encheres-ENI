@@ -13,6 +13,11 @@ public class Enchere {
 		this.no_utilisateur = no_utilisateur;
 		this.no_article = no_article;
 	}
+	
+	public Enchere() {
+	
+	}
+
 	public LocalDate getDateEnchère() {
 		return dateEnchère;
 	}

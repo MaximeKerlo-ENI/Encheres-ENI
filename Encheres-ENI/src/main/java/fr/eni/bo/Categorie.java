@@ -11,6 +11,11 @@ public class Categorie {
 		this.libelle = libelle;
 		this.categorieArticle = categorieArticle;
 	}
+	
+	public Categorie() {
+		
+	}
+
 	public int getNoCategorie() {
 		return noCategorie;
 	}

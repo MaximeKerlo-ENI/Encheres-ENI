@@ -32,6 +32,11 @@ public class ArticleVendu {
 		this.no_utilisateur = no_utilisateur;
 		this.no_categorie = no_categorie;
 	}
+	
+	public ArticleVendu() {
+		
+	}
+
 	public int getNoArticle() {
 		return noArticle;
 	}
