@@ -18,13 +18,13 @@ public class UserManager {
 	 * On initialise la liste des utilisateurs de l'application dans le constructeur
 	 */
 	
-	Utilisateur user1 = new Utilisateur("utilisateurBDD", "Pa$$w0rd", false); // idéalement il faudrait crypter le mot de passe
+	Utilisateur user1 = new Utilisateur("utilisateurBDD", "Pa$$w0rd"); // idéalement il faudrait crypter le mot de passe
 		
 		
 		utilisateurs.add(user1);
-		utilisateurs.add(user2);
 		
-	}
+		
+	
 
 	/**
 	 * findByUsernameAndPassword()
