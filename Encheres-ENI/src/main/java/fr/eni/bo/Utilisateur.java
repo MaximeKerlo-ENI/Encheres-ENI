@@ -13,7 +13,7 @@ public class Utilisateur {
 	private String codePostal;
 	private String ville;
 	private String motDePasse;
-	private int credit;
+	private int credit = 100;
 	private String administrateur;
 	private ArrayList<ArticleVendu> listeArticleVendu;
 	private ArrayList<Enchere> listEnchere;
