@@ -1,10 +1,10 @@
-package fr.eni.jee.bll;
+package fr.eni.bll;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.bo.Utilisateur;
-import fr.eni.jee.bo.User;
+
 
 /**
  * Classe charger de gérer nos utilisateurs
