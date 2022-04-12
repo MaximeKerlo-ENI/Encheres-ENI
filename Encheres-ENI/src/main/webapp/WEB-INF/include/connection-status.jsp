@@ -8,13 +8,11 @@
 		Vous êtes connecté avec : ${utilisateurConnecte.username}
 		<!-- formulaire de déconnexion -->
 		<%-- parce qu'on utilise des sous -url /admin on doit utiliser : ${pageContext.request.contextPath} : réference vers l'url de l'application : http://localhost:8080/DemoSessionFiltre --%>
-		<form class="inline-form" action="${pageContext.request.contextPath}/deconnexion" method="POST">
-			<button>déconnexion</button>
-		</form>
+		<%@ include file="/WEB-INF/include/nav.html"%>
 	</c:when>
 	<c:otherwise>
 	<%-- parce qu'on utilise des sous -url /admin on doit utiliser : ${pageContext.request.contextPath} : réference vers l'url de l'application : http://localhost:8080/DemoSessionFiltre --%>
-		Vous n'êtes pas connecté : <a href="${pageContext.request.contextPath}/connexion">connexion</a>
+		<a href="${pageContext.request.contextPath}/WEB-INF/connexion">Connexion</a>
 	</c:otherwise>
 	</c:choose>	
 </section>
