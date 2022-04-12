@@ -34,6 +34,15 @@ public class Utilisateur {
 		this.listeArticleVendu = listeArticleVendu;
 		this.listEnchere = listEnchere;
 	}
+	
+	public Utilisateur(String pseudo, String motDePasse) {
+		this.pseudo = pseudo;
+		this.motDePasse = motDePasse;
+	}
+	public Utilisateur() {
+		
+	}
+
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
