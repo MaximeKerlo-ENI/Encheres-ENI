@@ -9,6 +9,10 @@
 <body>
 
 	<header>
+<<<<<<< HEAD
+=======
+		<%@ include file="./include/nav.html"%>
+>>>>>>> branch 'christophe' of https://github.com/MaximeKerlo-ENI/Encheres-ENI
 		<%@ include file="./include/connection-status.jsp"%>
 	</header>
 

@@ -3,6 +3,7 @@ package fr.eni.jee.bll;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.bo.Utilisateur;
 import fr.eni.jee.bo.User;
 
 /**
@@ -11,13 +12,13 @@ import fr.eni.jee.bo.User;
  */
 public class UserManager {
 	
-	private List<User> utilisateurs = new ArrayList<User>();
+	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 
 	/**
 	 * On initialise la liste des utilisateurs de l'application dans le constructeur
 	 */
-	public UserManager() {
-		User user1 = new User("utilisateurBDD", "Pa$$w0rd", false); // idéalement il faudrait crypter le mot de passe
+	
+	Utilisateur user1 = new Utilisateur("utilisateurBDD", "Pa$$w0rd", false); // idéalement il faudrait crypter le mot de passe
 		
 		
 		utilisateurs.add(user1);
@@ -30,10 +31,10 @@ public class UserManager {
 	 * cherche si un utilisateur correspond au username/password donnée en paramètre
 	 * si non trouvé, retourne null
 	 */
-	public User findByUsernameAndPassword(String username, String password) {
-		for (User user : utilisateurs) {
+	public Utilisateur findByUsernameAndPassword(String username, String password) {
+		for (Utilisateur user : Utilisateur) {
 			if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-				return user;
+				return utilisateurs;
 			}
 		}
 		return null; // on retourne null si non trouvé
