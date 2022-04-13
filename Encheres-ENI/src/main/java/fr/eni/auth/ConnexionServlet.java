@@ -38,14 +38,14 @@ public class ConnexionServlet extends HttpServlet {
 		// 1 - on recupère le username et le password du formulaire
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+
 		// 2 - on va chercher dans notre base d'utilisateur si un utilisateur correspond
 		Utilisateur utilisateur = userManager.findByUsernameAndPassword(username, password);
 		
 		// si jamais utilisateur non trouvé
 		if (utilisateur == null) {
 			// j'affiche un message d'erreur et je redirige sur le formulaire
-			request.setAttribute("erreur", "username ou mot de pase non valide");
+			request.setAttribute("erreur", "pseudo ou mot de pase non valide");
 			this.doGet(request, response);
 		}
 		// sinon : on ajoute l'utilisateur en session et on redirige sur la page d'accueil
