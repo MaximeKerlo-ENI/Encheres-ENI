@@ -32,6 +32,7 @@ public class UserManager {
 	 */
 	public Utilisateur findByUsernameAndPassword(String username, String password) {
 		for (Utilisateur user : utilisateurs) {
+			System.out.println(user);
 			if (user.getNom().equals(username) && user.getMotDePasse().equals(password)) {
 				return user;
 			}
