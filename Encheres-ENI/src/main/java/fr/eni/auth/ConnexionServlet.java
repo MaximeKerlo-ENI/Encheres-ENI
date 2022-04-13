@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.bll.UserManager;
+import fr.eni.bo.Utilisateur;
+
 
 @WebServlet("/connexion")
 public class ConnexionServlet extends HttpServlet {
@@ -17,7 +20,7 @@ public class ConnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	// reference vers notre userManager
-	//private UserManager userManager = new UserManager();
+	private UserManager userManager = new UserManager();
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/connexion.jsp").forward(request, response);
@@ -32,12 +35,12 @@ public class ConnexionServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*// 1 - on recupère le username et le password du formulaire
+		// 1 - on recupère le username et le password du formulaire
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
 		// 2 - on va chercher dans notre base d'utilisateur si un utilisateur correspond
-		User utilisateur = userManager.findByUsernameAndPassword(username, password);
+		Utilisateur utilisateur = userManager.findByUsernameAndPassword(username, password);
 		
 		// si jamais utilisateur non trouvé
 		if (utilisateur == null) {
@@ -51,6 +54,6 @@ public class ConnexionServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateurConnecte", utilisateur);
 			response.sendRedirect("./");
-		}*/
+		}
 	}
 }
