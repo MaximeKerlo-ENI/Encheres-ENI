@@ -17,6 +17,7 @@ public class Utilisateur {
 	private String administrateur;
 	private ArrayList<ArticleVendu> listeArticleVendu;
 	private ArrayList<Enchere> listEnchere;
+	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, String administrateur) {
 		this.noUtilisateur = noUtilisateur;
@@ -31,9 +32,7 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
-		this.listeArticleVendu = listeArticleVendu;
-		this.listEnchere = listEnchere;
-	}
+		}
 	
 	public Utilisateur(String pseudo, String motDePasse) {
 		this.pseudo = pseudo;

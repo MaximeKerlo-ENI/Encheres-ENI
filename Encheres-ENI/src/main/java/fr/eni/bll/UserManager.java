@@ -1,4 +1,4 @@
-package fr.eni.jee.bll;
+package fr.eni.bll;
 
 import java.util.ArrayList;
 import java.util.List;

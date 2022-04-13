@@ -6,8 +6,8 @@ import java.util.List;
 
 import fr.eni.bo.Enchere;
 import fr.eni.bll.BusinessException;
-import fr.eni.jee.dal.DAOFactory;
-import fr.eni.jee.dal.EnchereDAO;
+import fr.eni.dal.DAOFactory;
+import fr.eni.dal.EnchereDAO;
 
 /**
  * La couche BLL (ou Metier) sert à :
@@ -15,7 +15,7 @@ import fr.eni.jee.dal.EnchereDAO;
  * - si besoin (pas dans notre cas), effectuer les traitements "metiers" lié au fonctionnel 
  */
 
-public class encheresManager {
+public class EncheresManager {
 	// attribut qui contient la référence vers notre couche DAL (ajout base de donnée)
 	private EnchereDAO enchereDAO = DAOFactory.getEnchereDAO();
 

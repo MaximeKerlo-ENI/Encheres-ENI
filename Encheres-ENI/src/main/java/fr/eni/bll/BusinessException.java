@@ -1,4 +1,4 @@
-package fr.eni.jee.bll;
+package fr.eni.bll;
 
 /**
  * Exception personnalisée qu'on enverra si erreurs de validation
