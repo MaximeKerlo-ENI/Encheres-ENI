@@ -17,7 +17,7 @@ public class UserManager {
 	 * On initialise la liste des utilisateurs de l'application dans le constructeur
 	 */
 	public UserManager() {
-		Utilisateur user1 = new Utilisateur("cyril", "Pa$$w0rd", false); // idéalement il faudrait crypter le mot de passe
+		Utilisateur user1 = new Utilisateur("utilisateur", "Pa$$w0rd", false); // idéalement il faudrait crypter le mot de passe
 		Utilisateur user2 = new Utilisateur("admin", "Pa$$w0rd", true); // idéalement il faudrait crypter le mot de passe
 		
 		utilisateurs.add(user1);
