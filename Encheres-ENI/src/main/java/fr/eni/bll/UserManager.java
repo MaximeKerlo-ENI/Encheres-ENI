@@ -6,11 +6,11 @@ import java.util.List;
 import fr.eni.bo.Utilisateur;
 
 /**
- * Classe charger de gérer nos utilisateurs
- * TODO : rajouter une couche DAO pour stocker les utilisateurs dans une base de donnée
+ * Classe charger de gérer nos utilisateurs TODO : rajouter une couche DAO pour
+ * stocker les utilisateurs dans une base de donnée
  */
 public class UserManager {
-	
+
 	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 
 	/**
@@ -22,17 +22,16 @@ public class UserManager {
 		
 		utilisateurs.add(user1);
 		utilisateurs.add(user2);
-		
+
 	}
 
 	/**
-	 * findByUsernameAndPassword()
-	 * cherche si un utilisateur correspond au username/password donnée en paramètre
-	 * si non trouvé, retourne null
+	 * findByUsernameAndPassword() cherche si un utilisateur correspond au
+	 * username/password donnée en paramètre si non trouvé, retourne null
 	 */
 	public Utilisateur findByUsernameAndPassword(String username, String password) {
 		for (Utilisateur user : utilisateurs) {
-			if (user.getNom().equals(username) && user.getMotDePasse().equals(password)) {
+			if (user.getPseudo().equals(username) && user.getMotDePasse().equals(password)) {
 				return user;
 			}
 		}

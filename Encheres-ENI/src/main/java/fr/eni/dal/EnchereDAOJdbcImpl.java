@@ -21,9 +21,9 @@ public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
         try {
             String INSERT = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = cnx.prepareStatement(INSERT);
-            stmt.setInt(1, enchere.getNo_utilisateur());
+            stmt.setInt(1, enchere.getUtilisateur());
             stmt.setInt(2, enchere.getNo_article());
-            stmt.setObject(3, new Timestamp(enchere.getDateEnchère().getTime()));
+            stmt.setObject(3, new Timestamp(enchere.getDateEnchere().getTime()));
             stmt.setFloat(4, enchere.getMontant_enchere());
             stmt.executeUpdate();
             cnx.close();
