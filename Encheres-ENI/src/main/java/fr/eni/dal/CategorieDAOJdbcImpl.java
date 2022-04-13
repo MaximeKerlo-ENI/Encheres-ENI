@@ -3,6 +3,7 @@ package fr.eni.dal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.eni.bll.BusinessException;
@@ -29,25 +30,26 @@ public abstract class CategorieDAOJdbcImpl implements DAOCategorie {
 	        }
 	    }
 	
-	  public void select(Categorie categorie) throws BusinessException {
-	    	 Connection cnx = ConnectionProvider.getConnection();
+	  public boolean selectLibelle(String libelleToCheck) throws BusinessException {
+		  Connection cnx = ConnectionProvider.getConnection();
+	        boolean sql = true;
 	        try {
-	            String INSERT = "INSERT INTO CATEGORIES (no_categorie,libelle) VALUES (?, ?)";
-	            PreparedStatement stmt = cnx.prepareStatement(INSERT);
-	            stmt.setInt(1, categorie.getNoCategorie());
-	            stmt.setString(2, categorie.getLibelle());
-	            stmt.executeUpdate();
+	            String select = "SELECT * FROM CATEGORIES WHERE libelle LIKE ?";
+	            PreparedStatement stmt = cnx.prepareStatement(select);
+	            stmt.setString(1, libelleToCheck);
+	            stmt.execute();
+	            ResultSet rs = stmt.getResultSet();
+	            if (rs.next()) {
+	                sql = false;
+	            }
 	            cnx.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            BusinessException BusinessException = new BusinessException();
-	            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_INSERT);
+	            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
 	            throw BusinessException;
 	        }
+	        return sql;
 	    }
-	  
-	  
-	  
-	
 
 }

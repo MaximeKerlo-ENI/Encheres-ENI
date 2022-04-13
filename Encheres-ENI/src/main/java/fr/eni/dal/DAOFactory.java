@@ -1,5 +1,7 @@
 package fr.eni.dal;
 
+import fr.eni.bo.Retrait;
+
 public class DAOFactory {
 	
 	    public static DAOUtilisateur getDAOUtilisateur() {
@@ -13,10 +15,14 @@ public class DAOFactory {
 	    public static DAOCategorie getDAOCategorie() {
 	        return new CategorieDAOJdbcImpl();
 	    }
-	    public static DAOEnchere getDAOEnchere() {
-	        return new EnchereDAOJdbcImpl();
-	    }
+	   
 	    public static DAO<Retrait> getDAORetrait() {
 	        return new RetraitDAOJdbcImpl();
 	    }
+
+
+		public static DAOEnchere getEnchereDAO() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	}
