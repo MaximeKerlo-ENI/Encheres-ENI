@@ -1,32 +1,29 @@
-package fr.eni.dal;
-
-
+package fr.eni.bll;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.bo.Utilisateur;
 
-
 /**
  * Classe charger de gérer nos utilisateurs
  * TODO : rajouter une couche DAO pour stocker les utilisateurs dans une base de donnée
  */
-public class TestUserManager {
+public class UserManager {
 	
 	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 
 	/**
 	 * On initialise la liste des utilisateurs de l'application dans le constructeur
 	 */
-	
-	Utilisateur user1 = new Utilisateur("utilisateurBDD", "Pa$$w0rd"); // idéalement il faudrait crypter le mot de passe
-		
+	public UserManager() {
+		Utilisateur user1 = new Utilisateur("cyril", "Pa$$w0rd", false); // idéalement il faudrait crypter le mot de passe
+		Utilisateur user2 = new Utilisateur("admin", "Pa$$w0rd", true); // idéalement il faudrait crypter le mot de passe
 		
 		utilisateurs.add(user1);
+		utilisateurs.add(user2);
 		
-		
-	
+	}
 
 	/**
 	 * findByUsernameAndPassword()
@@ -34,9 +31,9 @@ public class TestUserManager {
 	 * si non trouvé, retourne null
 	 */
 	public Utilisateur findByUsernameAndPassword(String username, String password) {
-		for (Utilisateur user : Utilisateur) {
+		for (Utilisateur user : utilisateurs) {
 			if (user.getNom().equals(username) && user.getMotDePasse().equals(password)) {
-				return utilisateurs;
+				return user;
 			}
 		}
 		return null; // on retourne null si non trouvé

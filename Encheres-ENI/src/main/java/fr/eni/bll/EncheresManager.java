@@ -6,8 +6,8 @@ import java.util.List;
 
 import fr.eni.bo.Enchere;
 import fr.eni.bll.BusinessException;
+import fr.eni.dal.DAOEnchere;
 import fr.eni.dal.DAOFactory;
-import fr.eni.dal.EnchereDAO;
 
 /**
  * La couche BLL (ou Metier) sert à :
@@ -17,8 +17,7 @@ import fr.eni.dal.EnchereDAO;
 
 public class EncheresManager {
 	// attribut qui contient la référence vers notre couche DAL (ajout base de donnée)
-	private EnchereDAO enchereDAO = DAOFactory.getEnchereDAO();
-
+	private DAOEnchere enchereDAO = DAOFactory.getEnchereDAO();
 	
 	/**
 	 * add(Enchere encheres)
@@ -31,7 +30,7 @@ public class EncheresManager {
 		// 1 - je valide les données
 		validation(encheres);
 		
-		// 2 - j'appelle la couche DAO (RepasDAO) pour effectuer la création de repas
+		// 2 - j'appelle la couche DAO (EnchereDAO) pour effectuer la création des enchères
 		try {
 			this.enchereDAO.add(encheres);
 		} catch (SQLException e) {
@@ -78,7 +77,7 @@ public class EncheresManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null; // si jamais y'a une exception onretournera null
+		return null; // si jamais y'a une exception on retournera null
 	}
 
 }
