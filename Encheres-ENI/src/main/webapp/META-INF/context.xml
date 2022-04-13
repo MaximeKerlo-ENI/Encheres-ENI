@@ -19,8 +19,8 @@
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 		type="javax.sql.DataSource"
 		
-		url="jdbc:sqlserver://localhost;databasename=Enchere"
-		username="utilisateurBDDEnchere"
+		url="jdbc:sqlserver://localhost;databasename=Enitrocenchere"
+		username="utilisateur"
 		password="Pa$$w0rd"
 		
 		maxTotal="100"

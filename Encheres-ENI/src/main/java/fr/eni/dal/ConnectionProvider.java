@@ -1,4 +1,4 @@
-package fr.eni.jee.dal;
+package fr.eni.dal;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -19,25 +19,29 @@ public class ConnectionProvider {
 	// bloc static : bloc d'initialisation qui va être appelé UNE fois au chargement
 	// de la classe
 	// est pratique pour initialiser des variables "statiques"
-	static {
-		Context context;
-		try {
-			context = new InitialContext();
-			ConnectionProvider.datasource = (DataSource) context.lookup("java:comp/env/jdbc/pool_cnx");
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	private static DataSource dataSource;
 
-	/**
-	 * getConnection() : méthode statique qui va pouvoir être appelée dans nos
-	 * implémentations DAO pour récupérer une connexion à la base de donéne depuis
-	 * le pool de connexion
-	 * 
-	 * @throws SQLException
-	 */
-	public static Connection getConnection() throws SQLException {
-		return ConnectionProvider.datasource.getConnection();
-	}
+    // Au chargement de la classe, la DataSource est recherchée dans l'arbre JNDI
+    static
+    {
+        Context context;
+        try {
+            context = new InitialContext();
+            ConnectionProvider.dataSource = (DataSource)context.lookup("java:comp/env/jdbc/pool_cnx");
+        } catch (NamingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Impossible d'accéder à la base de données");
+        }
+    }
+    
+    /**
+     * Cette méthode retourne une connexion opérationnelle issue du pool de connexion
+     * vers la base de données. 
+     * @return Connection
+     * @throws SQLException If something went wrong with the context (not found, wrong values)
+     */
+    public static Connection getConnection() throws SQLException
+    {
+        return ConnectionProvider.dataSource.getConnection();
+    }
 }
