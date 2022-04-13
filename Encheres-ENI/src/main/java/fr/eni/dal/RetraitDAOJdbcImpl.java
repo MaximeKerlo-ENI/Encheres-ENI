@@ -22,7 +22,7 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
         try {
             String INSERT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = cnx.prepareStatement(INSERT);
-            stmt.setInt(1, retrait.getNo_article());
+            stmt.setInt(1, retrait.getArticle().getNoArticle());
             stmt.setString(2, retrait.getRue());
             stmt.setString(3, retrait.getCode_postal());
             stmt.setString(4, retrait.getVille());
@@ -73,7 +73,7 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
             stmt.setString(1, retrait.getRue());
             stmt.setString(2, retrait.getCode_postal());
             stmt.setString(3, retrait.getVille());
-            stmt.setInt(4, retrait.getNo_article());
+            stmt.setInt(4, retrait.getArticle().getNoArticle());
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
@@ -89,7 +89,7 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
         String DELETE = "DELETE FROM RETRAITS WHERE no_article = ? ";
         try {
             PreparedStatement stmt = cnx.prepareStatement(DELETE);
-            stmt.setInt(1, retrait.getNo_article());
+            stmt.setInt(1, retrait.getArticle().getNoArticle());
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
@@ -106,16 +106,16 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
      * @return Retrait the instance
      * @throws SQLException if the ResultSet doesn't match the different fields
      */
-    private Retrait hydrateRetrait(ResultSet rs) throws BusinessException {
-        return new Retrait(
-                rs.getInt("no_article"),
-                rs.getString("rue"),
-                rs.getString("code_postal"),
-                rs.getString("ville")
-        );
+  //  private Retrait hydrateRetrait(ResultSet rs) throws BusinessException {
+       // return new Retrait(     		
+               // rs.getString("rue"),
+               // rs.getString("code_postal"),
+              //  rs.getString("ville"),
+               // rs.getInt("no_article")
+        //)
     }
-}
+
 	
 	
 	
-}
+

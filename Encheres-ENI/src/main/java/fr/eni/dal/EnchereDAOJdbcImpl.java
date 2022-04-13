@@ -2,6 +2,7 @@ package fr.eni.dal;
 
 import java.security.Timestamp;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.List;
 import fr.eni.bll.BusinessException;
 import fr.eni.bo.ArticleVendu;
 import fr.eni.bo.Enchere;
+import fr.eni.bo.Utilisateur;
 
 
 public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
@@ -21,17 +23,17 @@ public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
         try {
             String INSERT = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = cnx.prepareStatement(INSERT);
-            stmt.setInt(1, enchere.getUtilisateur());
-            stmt.setInt(2, enchere.getNo_article());
-            stmt.setObject(3, new Timestamp(enchere.getDateEnchere().getTime()));
+            stmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+            stmt.setInt(2, enchere.getArticle().getNoArticle());
+            stmt.setDate(3,Date.valueOf(enchere.getDateEnchere()));
             stmt.setFloat(4, enchere.getMontant_enchere());
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DALException dalException = new DALException();
-            dalException.addError(ErrorCodesDAL.ERROR_SQL_INSERT);
-            throw dalException;
+            BusinessException BusinessException = new BusinessException();
+            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_INSERT);
+            throw BusinessException;
         }
     }
 
@@ -44,7 +46,7 @@ public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
      * @throws DALException If there is any issue with the SQL query
      */
     @Override
-    public List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String state) throws DALException {
+    public List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String state) throws BusinessException {
     	Connection cnx = ConnectionProvider.getConnection();
         List <Integer> noArticlesMatched = new ArrayList<>();
 
@@ -64,9 +66,9 @@ public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DALException dalException = new BusinessException();
-            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw dalException;
+            BusinessException BusinessException = new BusinessException();
+            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw BusinessException;
         }
 
         return noArticlesMatched;
@@ -104,9 +106,9 @@ public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DALException dalException = new BusinessException();
-            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw dalException;
+            BusinessException BusinessException = new BusinessException();
+            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw BusinessException;
         }
         return articlesWonByUtilisateur;
     }
@@ -146,8 +148,8 @@ public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            Connection cnx = ConnectionProvider.getConnection(); 
-            BusinessException = new Connection cnx = ConnectionProvider.getConnection();
+            
+            BusinessException BusinessException = new BusinessException();
             BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
             throw BusinessException;
         }
@@ -158,18 +160,15 @@ public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
         return null;
     }
 
-    @Override
     public List<Enchere> selectAll() throws BusinessException {
         return null;
     }
 
-    @Override
     public void update(Enchere enchere) throws BusinessException {
 
     }
 
-    @Override
-    public void delete(Enchere enchere) throws DALException {
+    public void delete(Enchere enchere) throws BusinessException {
 
     }
 
