@@ -1,4 +1,4 @@
-package fr.eni.jee.auth;
+package fr.eni.auth;
 
 import java.io.IOException;
 
