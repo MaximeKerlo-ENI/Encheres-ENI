@@ -16,5 +16,25 @@
 	</div>
 			
 	<h1 class="text-center">Liste des enchères</h1>
+	
+	<div class="container col-5">
+		<label>Filtres : </label>
+		<div>
+		  <div class="form-outline">
+		    <input type="search" id="form1" class="form-control" />
+		  </div>
+		  <button type="button" class="btn btn-primary">
+		    <i class="fas fa-search"></i>
+		  </button>
+		</div><br>
+		<label>Catégorie : </label>
+		<select class="form-select" aria-label="Default select example">
+			<option>placeholder
+		</select>				
+	</div>
+	<div class="container col-5">
+			<button class="btn btn-primary">Rechercher</button>
+	</div>
+	
 </body>
 </html>
