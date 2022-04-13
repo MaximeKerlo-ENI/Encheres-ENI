@@ -45,8 +45,8 @@ public class EncheresManager {
 	 */
 	private void validation(Enchere encheres)  throws BusinessException{
 		// 1 - on valide que la date est postérieure à la date du jour
-		if (encheres.getDate().isBefore(LocalDate.now())) {
-			throw new BusinessException("la date du repas doit être égale ou supérieure à la date du jour");
+		if (encheres.getDateEnchère().isBefore(LocalDate.now())) {
+			throw new BusinessException("la date de l'encher doit être égale ou supérieure à la date du jour");
 		}
 		
 		// 2 - on valide que le repas à au moins 2 aliments
@@ -58,7 +58,7 @@ public class EncheresManager {
 	}
 
 	/**
-	 * getAll() : retourne la liste des repas depuis la couche DAL
+	 * getAll() : retourne la liste des enchères depuis la couche DAL
 	 */
 	public List<Enchere> getAll() {
 		// TODO Auto-generated method stub
@@ -70,15 +70,15 @@ public class EncheresManager {
 		return null; // si jamais y'a une exception onretournera null
 	}
 
-	public List<String> getIngredients(int idRepas) {
-		// TODO Auto-generated method stub
-		try {
-			return this.enchereDAO.getIngredients(idRepas);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null; // si jamais y'a une exception on retournera null
-	}
+//	public List<String> getIngredients(int idRepas) {
+//		// TODO Auto-generated method stub
+//		try {
+//			return this.enchereDAO.getIngredients(idRepas);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return null; // si jamais y'a une exception on retournera null
+//	}
 
 }
 
