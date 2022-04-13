@@ -35,6 +35,9 @@
 	<div class="container col-5">
 			<button class="btn btn-primary">Rechercher</button>
 	</div>
+	<div>
+		<!-- Liste article ici -->
+	</div>
 	
 </body>
 </html>
