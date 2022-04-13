@@ -12,7 +12,7 @@
 	</c:when>
 	<c:otherwise>
 	<%-- parce qu'on utilise des sous -url /admin on doit utiliser : ${pageContext.request.contextPath} : réference vers l'url de l'application : http://localhost:8080/DemoSessionFiltre --%>
-		<a href="${pageContext.request.contextPath}/connexion.jsp">Connexion</a>
+		<a href="${pageContext.request.contextPath}/connexion">Connexion</a>
 	</c:otherwise>
 	</c:choose>	
 </section>
