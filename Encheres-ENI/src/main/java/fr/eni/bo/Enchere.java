@@ -36,7 +36,7 @@ public class Enchere {
 	public void setNo_utilisateur(Utilisateur no_utilisateur) {
 		this.no_utilisateur = no_utilisateur;
 	}
-	public ArticleVendu getNo_article() {
+	public int getNo_article() {
 		return no_article;
 	}
 	public void setNo_article(ArticleVendu no_article) {

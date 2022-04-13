@@ -1,24 +1,30 @@
 package fr.eni.dal;
 
+import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import fr.eni.bll.BusinessException;
+import fr.eni.bo.ArticleVendu;
 import fr.eni.bo.Enchere;
-import fr.eni.bo.Utilisateur;
 
-public class EnchereDAOJdbcImpl implements DAOEnchere {
-    public void insert(Enchere enchere) throws DALException {
-    	Connection cnx = ConnectionProvider.getConnection();
+
+public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
+    public void insert(Enchere enchere) throws BusinessException {
+    	 Connection cnx = ConnectionProvider.getConnection();
         try {
             String INSERT = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = cnx.prepareStatement(INSERT);
-            stmt.setInt(1, enchere.getNoUtilisateur());
-            stmt.setInt(2, enchere.getNoArticle());
-            stmt.setObject(3, new Timestamp(enchere.getDateEnchere().getTime()));
-            stmt.setInt(4, enchere.getMontantEnchere());
+            stmt.setInt(1, enchere.getNo_utilisateur());
+            stmt.setInt(2, enchere.getNo_article());
+            stmt.setObject(3, new Timestamp(enchere.getDateEnchère().getTime()));
+            stmt.setFloat(4, enchere.getMontant_enchere());
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
@@ -39,7 +45,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
      */
     @Override
     public List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String state) throws DALException {
-        Connection cnx = JdbcTools.connect();
+    	Connection cnx = ConnectionProvider.getConnection();
         List <Integer> noArticlesMatched = new ArrayList<>();
 
         String SELECT_BY_UTILISATEUR_AND_ETAT = "SELECT E.no_article " +
@@ -58,7 +64,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DALException dalException = new DALException();
+            DALException dalException = new BusinessException();
             dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
             throw dalException;
         }
@@ -74,8 +80,8 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
      * @throws DALException If there is any issue with the SQL query
      */
     @Override
-    public List<Integer> getNoArticlesWonByUtilisateur(Utilisateur utilisateur) throws DALException {
-        Connection cnx = JdbcTools.connect();
+    public List<Integer> getNoArticlesWonByUtilisateur(Utilisateur utilisateur) throws BusinessException {
+    	Connection cnx = ConnectionProvider.getConnection();
         List<Integer> articlesWonByUtilisateur = new ArrayList<>();
         String SELECT_ARTICLES_WON_BY_USER =
                 "SELECT t.no_article FROM ( " +
@@ -98,7 +104,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DALException dalException = new DALException();
+            DALException dalException = new BusinessException();
             dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
             throw dalException;
         }
@@ -113,8 +119,8 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
      * @return HashMap<Integer, Integer> <amount, user_id>
      * @throws DALException If there is an issue with the SQL query
      */
-    public HashMap<Integer, Integer> getAmountAndPseudoOfBestOffer(ArticleVendu articleVendu) throws DALException {
-        Connection cnx = JdbcTools.connect();
+    public HashMap<Integer, Integer> getAmountAndPseudoOfBestOffer(ArticleVendu articleVendu) throws BusinessException {
+    	Connection cnx = ConnectionProvider.getConnection();
         HashMap<Integer, Integer> result = new HashMap<>();
         try {
             String GET_UTILISATEUR_AND_BEST_AUCTIONS = "SELECT no_utilisateur, " +
@@ -140,25 +146,25 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DALException dalException = new DALException();
-            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw dalException;
+            Connection cnx = ConnectionProvider.getConnection(); 
+            BusinessException = new Connection cnx = ConnectionProvider.getConnection();
+            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw BusinessException;
         }
         return result;
     }
 
-    @Override
-    public Enchere selectById(int id) throws DALException {
+    public Enchere selectById(int id) throws BusinessException {
         return null;
     }
 
     @Override
-    public List<Enchere> selectAll() throws DALException {
+    public List<Enchere> selectAll() throws BusinessException {
         return null;
     }
 
     @Override
-    public void update(Enchere enchere) throws DALException {
+    public void update(Enchere enchere) throws BusinessException {
 
     }
 
