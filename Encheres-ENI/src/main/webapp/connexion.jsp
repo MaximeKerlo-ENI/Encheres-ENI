@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<!-- include jsp : recopie une jsp à laquelle on peut preciser des paramètres -->
+<jsp:include page="./WEB-INF/include/head.jsp">
+	<jsp:param name="titre" value="Connexion" />
+</jsp:include>
+<body>
+	<div class="row ms-5 mt-3">
+		<div class="col-6">
+			<h3>ENI-Encheres</h3>
+		</div>
+	</div>
+		
+	<!-- on affiche les éventuelles erreurs -->
+	<p class="erreur">${erreur}</p>
+
+	<form action="./connexion" method="post">
+		<div class="container text-center mx-auto px-auto">
+			<label>Identifiant : </label>
+			<input type="text" name="username"/>
+		</div>
+		<br>
+		<div class="container text-center mx-auto px-auto">
+			<label>Mot de passe: </label>
+			<input type="password" name="password"/>
+		</div>
+		<br>
+		<div class="container text-center mx-auto pe-5 ps-0">
+			<button class="btn btn-primary">Connexion</button>
+		</div>
+		<div class="container text-center mx-auto pe-5 ps-0">
+			<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			<label class="form-check-label" for="flexCheckDefault">
+			Se souvenir de moi
+			</label>
+		</div>
+		<div class="container text-center mx-auto pe-5 ps-0">
+			<a href="">Mot de passe oublié?</a>
+		</div>
+		</form>
+		<div class="container text-center mx-auto pe-5 ps-0">
+			<a href="./newProfile.jsp" class="btn btn-primary">Créer un nouveau compte</a>
+		</div>
+	
+
+</body>
+</html>
