@@ -4,7 +4,7 @@
 <html>
 <head>
 <jsp:include page="./WEB-INF/include/head.jsp">
-	<jsp:param name="titre" value="Accueil" />
+	<jsp:param name="titre" value="Nouveau profil" />
 </jsp:include>
 <title>Nouveau profile</title>
 </head>

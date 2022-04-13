@@ -26,10 +26,12 @@
 			<label>Mot de passe: </label>
 			<input type="password" name="password"/>
 		</div>
+	
 		<br>
 		<div class="container text-center mx-auto pe-5 ps-0">
-			<button class="btn btn-primary">Connexion</button>
+			<button type="submit" class="btn btn-primary">Connexion</button>
 		</div>
+	</form>
 		<div class="container text-center mx-auto pe-5 ps-0">
 			<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
 			<label class="form-check-label" for="flexCheckDefault">
@@ -39,7 +41,7 @@
 		<div class="container text-center mx-auto pe-5 ps-0">
 			<a href="">Mot de passe oublié?</a>
 		</div>
-		</form>
+	
 		<div class="container text-center mx-auto pe-5 ps-0">
 			<a href="./newProfile.jsp" class="btn btn-primary">Créer un nouveau compte</a>
 		</div>
