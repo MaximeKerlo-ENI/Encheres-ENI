@@ -34,32 +34,32 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
             throw BusinessException;
         }
     }
-    /**
-     * Extract data from the DB by id
-     * @param noArticle int The primary key of the Retrait to extract from the DB
-     * @return retrait An instance of the retrait
-     * @throws BusinessException if the SQL INSERT request is wrong
-     */
-    public Retrait selectById(int noArticle) throws BusinessException {
-    	Connection cnx = ConnectionProvider.getConnection();
-        Retrait retrait = null;
-        String SELECT_BY_ID = "SELECT * FROM RETRAITS WHERE no_article = ?";
-        try {
-            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_ID);
-            stmt.setInt(1, noArticle);
-            stmt.execute();
-            ResultSet rs = stmt.getResultSet();
-            if (rs.next()) {
-                retrait = hydrateRetrait(rs);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw BusinessException;
-        }
-        return retrait;
-    }
+//    /**
+//     * Extract data from the DB by id
+//     * @param noArticle int The primary key of the Retrait to extract from the DB
+//     * @return retrait An instance of the retrait
+//     * @throws BusinessException if the SQL INSERT request is wrong
+//     */
+//    public Retrait selectById(int noArticle) throws BusinessException {
+//    	Connection cnx = ConnectionProvider.getConnection();
+//        Retrait retrait = null;
+//        String SELECT_BY_ID = "SELECT * FROM RETRAITS WHERE no_article = ?";
+//        try {
+//            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_ID);
+//            stmt.setInt(1, noArticle);
+//            stmt.execute();
+//            ResultSet rs = stmt.getResultSet();
+//            if (rs.next()) {
+//                retrait = hydrateRetrait(rs);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            BusinessException BusinessException = new BusinessException();
+//            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+//            throw BusinessException;
+//        }
+//        return retrait;
+//    }
 
     public List<Retrait> selectAll() throws BusinessException {
         return null;
