@@ -1,4 +1,6 @@
-package fr.eni.bll;
+package fr.eni.dal;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ import fr.eni.bo.Utilisateur;
  * Classe charger de gérer nos utilisateurs
  * TODO : rajouter une couche DAO pour stocker les utilisateurs dans une base de donnée
  */
-public class UserManager {
+public class TestUserManager {
 	
 	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 

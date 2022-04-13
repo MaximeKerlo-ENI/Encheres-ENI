@@ -1,4 +1,4 @@
-package fr.eni.jee.dal;
+package fr.eni.dal;
 
 public class DAOFactory {
 	

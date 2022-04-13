@@ -1,5 +1,8 @@
 package fr.eni.dal;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import fr.eni.bo.Retrait;
 
 public class RetraitDAOJdbcImpl implements DAO<Retrait>{
@@ -10,15 +13,14 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
      * @param  retrait Retrait The instance to insert into the DB
      * @throws DALException if the SQL INSERT request is wrong
      */
-    @Override
     public void insert(Retrait retrait) throws DALException {
     	 ConnectionProvider.getConnection();
         try {
             String INSERT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = cnx.prepareStatement(INSERT);
-            stmt.setInt(1, retrait.getNoArticle());
+            stmt.setInt(1, retrait.getNo_article());
             stmt.setString(2, retrait.getRue());
-            stmt.setString(3, retrait.getCodePostal());
+            stmt.setString(3, retrait.getCode_postal());
             stmt.setString(4, retrait.getVille());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -68,9 +70,9 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
         try {
             PreparedStatement stmt = cnx.prepareStatement(UPDATE_RETRAIT);
             stmt.setString(1, retrait.getRue());
-            stmt.setString(2, retrait.getCodePostal());
+            stmt.setString(2, retrait.getCode_postal());
             stmt.setString(3, retrait.getVille());
-            stmt.setInt(4, retrait.getNoArticle());
+            stmt.setInt(4, retrait.getNo_article());
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
@@ -87,7 +89,7 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
         String DELETE = "DELETE FROM RETRAITS WHERE no_article = ? ";
         try {
             PreparedStatement stmt = cnx.prepareStatement(DELETE);
-            stmt.setInt(1, retrait.getNoArticle());
+            stmt.setInt(1, retrait.getNo_article());
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
