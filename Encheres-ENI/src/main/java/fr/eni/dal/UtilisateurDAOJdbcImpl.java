@@ -73,7 +73,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur  {
      * @throws SQLException 
      * @throws DALException if the SQL SELECT request is wrong
      */
-    public Utilisateur selectPeudoPwd(String pseudo, String password) throws BusinessException, SQLException {
+    public Utilisateur selectPseudoPwd(String pseudo, String password) throws BusinessException, SQLException {
     	Connection cnx = ConnectionProvider.getConnection();
         Utilisateur utilisateur = null;
         try {
@@ -90,7 +90,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur  {
                 utilisateur = hydrateUtilisateur(rs);
             }
             cnx.close();
-        } catch (SQLException e) {
+        	} catch (SQLException e) {
             e.printStackTrace();
             BusinessException BusinessException = new BusinessException();
             BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
