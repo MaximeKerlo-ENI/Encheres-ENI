@@ -13,7 +13,7 @@ import fr.eni.bo.Enchere;
 public abstract class CategorieDAOJdbcImpl implements DAOCategorie {
 	
 	
-	  public void insert(Categorie categorie) throws BusinessException {
+	  public void insert(Categorie categorie) throws BusinessException, SQLException {
 	    	 Connection cnx = ConnectionProvider.getConnection();
 	        try {
 	            String INSERT = "INSERT INTO CATEGORIES (categorie,libelle) VALUES (?, ?)";
@@ -30,7 +30,7 @@ public abstract class CategorieDAOJdbcImpl implements DAOCategorie {
 	        }
 	    }
 	
-	  public boolean selectLibelle(String libelleToCheck) throws BusinessException {
+	  public boolean selectLibelle(String libelleToCheck) throws BusinessException, SQLException {
 		  Connection cnx = ConnectionProvider.getConnection();
 	        boolean sql = true;
 	        try {
