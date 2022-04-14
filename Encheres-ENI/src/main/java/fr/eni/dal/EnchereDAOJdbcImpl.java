@@ -1,31 +1,41 @@
 package fr.eni.dal;
 
+import java.security.Timestamp;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import fr.eni.bll.BusinessException;
+import fr.eni.bo.ArticleVendu;
 import fr.eni.bo.Enchere;
 import fr.eni.bo.Utilisateur;
 
-public class EnchereDAOJdbcImpl implements DAOEnchere {
-    public void insert(Enchere enchere) throws DALException {
-    	Connection cnx = ConnectionProvider.getConnection();
+
+public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
+	
+	
+    public void insert(Enchere enchere) throws BusinessException, SQLException {
+    	 Connection cnx = ConnectionProvider.getConnection();
         try {
             String INSERT = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = cnx.prepareStatement(INSERT);
-            stmt.setInt(1, enchere.getNoUtilisateur());
-            stmt.setInt(2, enchere.getNoArticle());
-            stmt.setObject(3, new Timestamp(enchere.getDateEnchere().getTime()));
-            stmt.setInt(4, enchere.getMontantEnchere());
+            stmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+            stmt.setInt(2, enchere.getArticle().getNoArticle());
+            stmt.setDate(3,Date.valueOf(enchere.getDateEnchere()));
+            stmt.setFloat(4, enchere.getMontant_enchere());
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DALException dalException = new DALException();
-            dalException.addError(ErrorCodesDAL.ERROR_SQL_INSERT);
-            throw dalException;
+            BusinessException BusinessException = new BusinessException();
+            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_INSERT);
+            throw e;
         }
     }
 
@@ -35,47 +45,50 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
      * @param utilisateur Utilisateur The user
      * @param state String The State ("EC", "AN" or "VE")
      * @return ArrayList<Integer> all the id of the articles that matched
+     * @throws SQLException 
      * @throws DALException If there is any issue with the SQL query
      */
-    @Override
-    public List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String state) throws DALException {
-        Connection cnx = JdbcTools.connect();
-        List <Integer> noArticlesMatched = new ArrayList<>();
-
-        String SELECT_BY_UTILISATEUR_AND_ETAT = "SELECT E.no_article " +
-                "FROM ENCHERES E " +
-                "INNER JOIN ARTICLES_VENDUS AV on E.no_article = AV.no_article " +
-                "WHERE AV.etat_vente = ? AND E.no_utilisateur = ?";
-        try {
-            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_UTILISATEUR_AND_ETAT);
-            stmt.setString(1, state);
-            stmt.setInt(2, utilisateur.getNoUtilisateur());
-            stmt.execute();
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                noArticlesMatched.add(rs.getInt("no_article"));
-            }
-            cnx.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            DALException dalException = new DALException();
-            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw dalException;
-        }
-
-        return noArticlesMatched;
-    }
+//    @Override
+//    public List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String etat_vente) throws  BusinessException, SQLException {
+//    	
+//    	Connection cnx = ConnectionProvider.getConnection();
+//        List <Integer> noArticlesMatched = new ArrayList<>();
+//
+//        String SELECT_BY_UTILISATEUR_AND_ETAT = "SELECT E.no_article " +
+//                "FROM ENCHERES E " +
+//                "INNER JOIN ARTICLES_VENDUS AV on E.no_article = AV.no_article " +
+//                "WHERE AV.etat_vente = ? AND E.no_utilisateur = ?";
+//        try {
+//            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_UTILISATEUR_AND_ETAT);
+//            stmt.setBoolean(1,ArticleVendu.getEtatVente );
+//            stmt.setInt(2, utilisateur.getNoUtilisateur());
+//            stmt.execute();
+//            ResultSet rs = stmt.getResultSet();
+//            while (rs.next()) {
+//                noArticlesMatched.add(rs.getInt("no_article"));
+//            }
+//            cnx.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            BusinessException BusinessException = new BusinessException();
+//            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+//            throw e;
+//        }
+//
+//        return noArticlesMatched;
+//    }
 
     /**
      * Return an ArrayList filled by no_articles that matched
      * the articles won by an user. SQL is looking for the latest auction made before the end date
      * @param utilisateur Utilisateur The user
      * @return ArrayList<Integer> all the id of the articles that matched
+     * @throws SQLException 
      * @throws DALException If there is any issue with the SQL query
      */
     @Override
-    public List<Integer> getNoArticlesWonByUtilisateur(Utilisateur utilisateur) throws DALException {
-        Connection cnx = JdbcTools.connect();
+    public List<Integer> getNoArticlesWonByUtilisateur(Utilisateur utilisateur) throws BusinessException, SQLException {
+    	Connection cnx = ConnectionProvider.getConnection();
         List<Integer> articlesWonByUtilisateur = new ArrayList<>();
         String SELECT_ARTICLES_WON_BY_USER =
                 "SELECT t.no_article FROM ( " +
@@ -98,9 +111,9 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DALException dalException = new DALException();
-            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw dalException;
+            BusinessException BusinessException = new BusinessException();
+            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw e;
         }
         return articlesWonByUtilisateur;
     }
@@ -111,10 +124,11 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
      * Second value is the id of the user that had made the current best auction
      * @param articleVendu The auction that we want to get the best offer
      * @return HashMap<Integer, Integer> <amount, user_id>
+     * @throws SQLException 
      * @throws DALException If there is an issue with the SQL query
      */
-    public HashMap<Integer, Integer> getAmountAndPseudoOfBestOffer(ArticleVendu articleVendu) throws DALException {
-        Connection cnx = JdbcTools.connect();
+    public HashMap<Integer, Integer> getAmountAndPseudoOfBestOffer(ArticleVendu articleVendu) throws BusinessException, SQLException {
+    	Connection cnx = ConnectionProvider.getConnection();
         HashMap<Integer, Integer> result = new HashMap<>();
         try {
             String GET_UTILISATEUR_AND_BEST_AUCTIONS = "SELECT no_utilisateur, " +
@@ -140,30 +154,27 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
             cnx.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            DALException dalException = new DALException();
-            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw dalException;
+            
+            BusinessException BusinessException = new BusinessException();
+            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw BusinessException;
         }
         return result;
     }
 
-    @Override
-    public Enchere selectById(int id) throws DALException {
+    public Enchere selectById(int id) throws BusinessException {
         return null;
     }
 
-    @Override
-    public List<Enchere> selectAll() throws DALException {
+    public List<Enchere> selectAll() throws BusinessException {
         return null;
     }
 
-    @Override
-    public void update(Enchere enchere) throws DALException {
+    public void update(Enchere enchere) throws BusinessException {
 
     }
 
-    @Override
-    public void delete(Enchere enchere) throws DALException {
+    public void delete(Enchere enchere) throws BusinessException {
 
     }
 
