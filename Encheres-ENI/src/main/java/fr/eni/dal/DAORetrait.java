@@ -8,8 +8,10 @@ import fr.eni.bo.Retrait;
 
 public interface DAORetrait {
 
-	List<Retrait> selectAll() throws BusinessException;
-	void delete(Retrait retrait) throws BusinessException, SQLException;
 	void insert(Retrait retrait) throws BusinessException, SQLException;
+	void update(Retrait retrait) throws BusinessException, SQLException;
+	void delete(Retrait retrait) throws BusinessException, SQLException;
+	
+	
 	
 }

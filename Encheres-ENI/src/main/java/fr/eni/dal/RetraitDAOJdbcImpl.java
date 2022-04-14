@@ -37,9 +37,7 @@ public abstract class RetraitDAOJdbcImpl implements DAO<Retrait>{
     }
 //   
 
-    public List<Retrait> selectAll() throws BusinessException {
-        return null;
-    }
+   
 
     public void update(Retrait retrait) throws BusinessException, SQLException {
     	Connection cnx = ConnectionProvider.getConnection();

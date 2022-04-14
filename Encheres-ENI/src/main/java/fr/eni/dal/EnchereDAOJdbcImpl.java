@@ -48,34 +48,35 @@ public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
      * @throws SQLException 
      * @throws DALException If there is any issue with the SQL query
      */
-    @Override
-    public List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String etat_vente) throws  BusinessException, SQLException {
-    	Connection cnx = ConnectionProvider.getConnection();
-        List <Integer> noArticlesMatched = new ArrayList<>();
-
-        String SELECT_BY_UTILISATEUR_AND_ETAT = "SELECT E.no_article " +
-                "FROM ENCHERES E " +
-                "INNER JOIN ARTICLES_VENDUS AV on E.no_article = AV.no_article " +
-                "WHERE AV.etat_vente = ? AND E.no_utilisateur = ?";
-        try {
-            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_UTILISATEUR_AND_ETAT);
-            stmt.setString(1, state);
-            stmt.setInt(2, utilisateur.getNoUtilisateur());
-            stmt.execute();
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                noArticlesMatched.add(rs.getInt("no_article"));
-            }
-            cnx.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw e;
-        }
-
-        return noArticlesMatched;
-    }
+//    @Override
+//    public List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String etat_vente) throws  BusinessException, SQLException {
+//    	
+//    	Connection cnx = ConnectionProvider.getConnection();
+//        List <Integer> noArticlesMatched = new ArrayList<>();
+//
+//        String SELECT_BY_UTILISATEUR_AND_ETAT = "SELECT E.no_article " +
+//                "FROM ENCHERES E " +
+//                "INNER JOIN ARTICLES_VENDUS AV on E.no_article = AV.no_article " +
+//                "WHERE AV.etat_vente = ? AND E.no_utilisateur = ?";
+//        try {
+//            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_UTILISATEUR_AND_ETAT);
+//            stmt.setBoolean(1,ArticleVendu.getEtatVente );
+//            stmt.setInt(2, utilisateur.getNoUtilisateur());
+//            stmt.execute();
+//            ResultSet rs = stmt.getResultSet();
+//            while (rs.next()) {
+//                noArticlesMatched.add(rs.getInt("no_article"));
+//            }
+//            cnx.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            BusinessException BusinessException = new BusinessException();
+//            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+//            throw e;
+//        }
+//
+//        return noArticlesMatched;
+//    }
 
     /**
      * Return an ArrayList filled by no_articles that matched
