@@ -84,19 +84,8 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
 		return null;
 	}
 
-    /**
-     * Fill an instance from a ResultSet
-     * @param rs the ResultSet
-     * @return Retrait the instance
-     * @throws SQLException if the ResultSet doesn't match the different fields
-     */
-  //  private Retrait hydrateRetrait(ResultSet rs) throws BusinessException {
-       // return new Retrait(     		
-               // rs.getString("rue"),
-               // rs.getString("code_postal"),
-              //  rs.getString("ville"),
-               // rs.getInt("no_article")
-        //)
+  
+  
     }
 
 	

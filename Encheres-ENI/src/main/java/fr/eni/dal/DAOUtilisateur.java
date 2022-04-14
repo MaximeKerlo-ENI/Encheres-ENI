@@ -11,7 +11,7 @@ import fr.eni.bo.Utilisateur;
 public interface DAOUtilisateur  {
 	void insert(Utilisateur utilisateur) throws BusinessException, SQLException;
 	Utilisateur selectById(int id) throws BusinessException, SQLException;
-	Utilisateur selectUtilisateurByPseudo(String pseudo) throws BusinessException, SQLException;
+	Utilisateur selectPseudoPwd(String pseudo, String password) throws BusinessException, SQLException;
 	HashMap<Integer, String> selectUtilisateursWithCurrentAuction() throws BusinessException, SQLException;
 	List<Utilisateur> selectAll() throws BusinessException, SQLException;
 	void updateCredit(int noUtilisateur, int newCredit) throws BusinessException, SQLException;
