@@ -315,4 +315,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur  {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public Utilisateur selectUtilisateurByPseudo(String pseudo) throws BusinessException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
