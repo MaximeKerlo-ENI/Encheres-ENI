@@ -9,7 +9,7 @@ import java.util.List;
 import fr.eni.bll.BusinessException;
 import fr.eni.bo.Retrait;
 
-public abstract class RetraitDAOJdbcImpl implements DAO<Retrait>{
+public class RetraitDAOJdbcImpl implements DAO<Retrait>{
 
 
     /**
@@ -73,6 +73,16 @@ public abstract class RetraitDAOJdbcImpl implements DAO<Retrait>{
             throw BusinessException;
         }
     }
+	@Override
+	public Retrait selectById(int id) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Retrait> selectAll() throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     /**
      * Fill an instance from a ResultSet

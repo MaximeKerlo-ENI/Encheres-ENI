@@ -73,13 +73,17 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur  {
      * @throws SQLException 
      * @throws DALException if the SQL SELECT request is wrong
      */
-    public Utilisateur selectUtilisateurByPseudo(String pseudo) throws BusinessException, SQLException {
+    public Utilisateur selectPeudoPwd(String pseudo, String password) throws BusinessException, SQLException {
     	Connection cnx = ConnectionProvider.getConnection();
         Utilisateur utilisateur = null;
         try {
-            String SELECT_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
-            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_PSEUDO);
+            String SELECTPseudoPwd = "SELECT (pseudo, mot_de_passe) FROM UTILISATEURS "
+            		+ "WHERE pseudo = ? AND mot_de_passe=?";
+            		
+            	
+            PreparedStatement stmt = cnx.prepareStatement(SELECTPseudoPwd);
             stmt.setString(1, pseudo);
+            stmt.setString(2, password);
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
             if (rs.next()) {

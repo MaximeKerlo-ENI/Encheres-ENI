@@ -17,7 +17,7 @@ import fr.eni.bo.Enchere;
 import fr.eni.bo.Utilisateur;
 
 
-public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
+public class EnchereDAOJdbcImpl implements DAOEnchere {
 	
 	
     public void insert(Enchere enchere) throws BusinessException, SQLException {
@@ -177,5 +177,12 @@ public abstract class EnchereDAOJdbcImpl implements DAOEnchere {
     public void delete(Enchere enchere) throws BusinessException {
 
     }
+
+	@Override
+	public List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String etat_vente)
+			throws BusinessException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
