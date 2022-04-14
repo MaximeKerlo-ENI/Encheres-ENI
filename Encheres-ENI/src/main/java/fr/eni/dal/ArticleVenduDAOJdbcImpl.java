@@ -85,8 +85,8 @@ public abstract class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
                 cnx.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-                BusinessException BusinessException = new BusinessException();
-                BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+              BusinessException BusinessException = new BusinessException();
+               BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
                 throw BusinessException;
             }
             return articlesVendus;
@@ -112,7 +112,7 @@ public abstract class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 //            return articlesVendus;
 //        }
         
-        public void delete(ArticleVendu articleVendu) throws DALException {
+        public void delete(ArticleVendu articleVendu) throws BusinessException {
         	Connection cnx = ConnectionProvider.getConnection();
             String DELETE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ? ";
             try {
@@ -132,13 +132,13 @@ public abstract class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
             stmt.setString(1, articleVendu.getNomArticle());
             stmt.setString(2, articleVendu.getDescription());
            
-            stmt.setObject(3, new Timestamp(articleVendu.getDateDebutEncheres().getTime()));
-            stmt.setObject(4, new Timestamp(articleVendu.getDateFinEncheres().getTime()));
-            stmt.setInt(5, articleVendu.setMiseAPrix(0));
+            stmt.setDate(3,Date.valueOf(articleVendu.getDateDebutEncheres()));
+            stmt.setDate(4,Date.valueOf(articleVendu.getDateFinEncheres()));
+            stmt.setInt(5,articleVendu.getMiseAPrix() );
             stmt.setInt(6, articleVendu.getPrixVente());
             stmt.setBoolean(7, articleVendu.isEtatVente());
-            stmt.setInt(8, articleVendu.getUtilisateur());
-            stmt.setInt(9, articleVendu.getCategorie());
+            stmt.setInt(8,articleVendu.getUtilisateur().getNoUtilisateur());
+            stmt.setInt(9,articleVendu.getCategorie().getNoCategorie());
         }
         private ArticleVendu hydrateArticleVendu(ResultSet rs) throws SQLException {
             return new ArticleVendu(
