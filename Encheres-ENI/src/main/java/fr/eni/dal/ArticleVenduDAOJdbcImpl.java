@@ -14,7 +14,7 @@ import fr.eni.bll.BusinessException;
 import fr.eni.bo.ArticleVendu;
 import fr.eni.bo.Categorie;
 
-public abstract class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
+public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 	
 	
 	public void insert(ArticleVendu articleVendu) throws BusinessException, SQLException {
