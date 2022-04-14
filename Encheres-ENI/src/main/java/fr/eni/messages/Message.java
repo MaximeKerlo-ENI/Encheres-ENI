@@ -1,6 +1,8 @@
 package fr.eni.messages;
 
+import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 import org.omg.CORBA.portable.InputStream;
@@ -10,8 +12,8 @@ public abstract class Message{
 
 	    static {
 	        try {
-	            InputStream utf8in = MessageReader.class.getClassLoader().getResourceAsStream("fr/eni/messages/error_messages.properties");
-	            Reader reader = new InputStreamReader(utf8in, StandardCharsets.UTF_8);
+	            java.io.InputStream utf8in = Message.class.getClassLoader().getResourceAsStream("fr/eni/messages/error_messages.properties");
+	            Reader reader = new InputStreamReader( utf8in, StandardCharsets.UTF_8);
 	            props = new Properties();
 	            props.load(reader);
 	        } catch (Exception e) {
