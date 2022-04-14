@@ -14,11 +14,11 @@ public class ArticleVendu {
 	private boolean etatVente; // (à déterminer : en cours, vendu...?)
 	private Retrait lieuRetrait;
 	private ArrayList<Enchere> listeEnchere;
-	private Utilisateur no_utilisateur;
-	private Categorie no_categorie;
+	private Utilisateur utilisateur;
+	private Categorie categorie;
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente, Retrait lieuRetrait,
-			Utilisateur no_utilisateur, Categorie no_categorie) {
+			Utilisateur utilisateur, Categorie categorie) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -29,8 +29,8 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 		this.lieuRetrait = lieuRetrait;
 		this.listeEnchere = listeEnchere;
-		this.no_utilisateur = no_utilisateur;
-		this.no_categorie = no_categorie;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
 	}
 	
 	public ArticleVendu() {
@@ -97,25 +97,25 @@ public class ArticleVendu {
 	public void setListeEnchere(ArrayList<Enchere> listeEnchere) {
 		this.listeEnchere = listeEnchere;
 	}
-	public Utilisateur getNo_utilisateur() {
-		return no_utilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
-	public void setNo_utilisateur(Utilisateur no_utilisateur) {
-		this.no_utilisateur = no_utilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
-	public Categorie getNo_categorie() {
-		return no_categorie;
+	public Categorie getCategorie() {
+		return categorie;
 	}
-	public void setNo_categorie(Categorie no_categorie) {
-		this.no_categorie = no_categorie;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", lieuRetrait=" + lieuRetrait
-				+ ", listeEnchere=" + listeEnchere + ", no_utilisateur=" + no_utilisateur + ", no_categorie="
-				+ no_categorie + "]";
+				+ ", listeEnchere=" + listeEnchere + ", utilisateur=" + utilisateur + ", categorie="
+				+ categorie + "]";
 	}
 	
 }
