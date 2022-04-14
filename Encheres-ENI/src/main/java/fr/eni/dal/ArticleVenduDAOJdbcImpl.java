@@ -2,10 +2,12 @@ package fr.eni.dal;
 
 import java.security.Timestamp;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.bll.BusinessException;
@@ -19,18 +21,18 @@ public abstract class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 		Connection cnx = ConnectionProvider.getConnection();
         try {
             String INSERT = "INSERT INTO ARTICLES_VENDUS " +
-                    "(nom_article, description, date_debut_encheres, date_fin_encheres, MiseAPrix, prix_vente, etat_vente, no_utilisateur, no_categorie) " +
+                    "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, etat_vente, no_utilisateur, no_categorie) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = cnx.prepareStatement(INSERT);
             stmt.setString(1,articleVendu.getNomArticle() );
-            stmt.setString(1,articleVendu.getDescription() );
-            stmt.setDate(1,articleVendu.getDateDebutEncheres());
-            stmt.setDate(1,articleVendu.getDateFinEncheres());
-            stmt.setInt(1,articleVendu.getMiseAPrix() );
-            stmt.setInt(1,articleVendu.getPrixVente());
-            stmt.setBoolean(1,articleVendu.isEtatVente());
-            stmt.setUtilisateur(1,articleVendu.getNo_utilisateur());
-            stmt.setCategorie(1,articleVendu.getNo_categorie());
+            stmt.setString(2,articleVendu.getDescription() );
+            stmt.setDate(3,Date.valueOf(articleVendu.getDateDebutEncheres()));
+            stmt.setDate(4,Date.valueOf(articleVendu.getDateFinEncheres()));
+            stmt.setInt(5,articleVendu.getMiseAPrix() );
+            stmt.setInt(6,articleVendu.getPrixVente());
+            stmt.setBoolean(7,articleVendu.isEtatVente());
+            stmt.setInt(8,articleVendu.getUtilisateur().getNoUtilisateur());
+            stmt.setInt(9,articleVendu.getCategorie().getNoCategorie());
             stmt.execute();
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
@@ -68,7 +70,7 @@ public abstract class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
             return articlesVendus;
         }
         
-        public List<Integer> filterByEtat(String etat) throws DALException {
+        public List<Integer> filterByEtat(String etat) throws BusinessException {
         	Connection cnx = ConnectionProvider.getConnection();
             List<Integer> articlesVendus = new ArrayList<>();
             try {
@@ -90,25 +92,25 @@ public abstract class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
             return articlesVendus;
         }
         
-        public List<ArticleVendu> select vendus throws BusinessException {
-        	Connection cnx = ConnectionProvider.getConnection();
-            List<ArticleVendu> articlesVendus = new ArrayList<>();
-            try {
-                String SELECT_VENDUS = "SELECT * FROM ARTICLES_VENDUS";
-                PreparedStatement stmt = cnx.prepareStatement(SELECT_VENDUS);
-                stmt.execute();
-                ResultSet rs = stmt.getResultSet();
-                while (rs.next()) {
-                    articlesVendus.add(hydrateArticleVendu(rs));
-                }
-                cnx.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                BusinessException BusinessException = new BusinessException();
-                BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-                throw BusinessException;        }
-            return articlesVendus;
-        }
+//        public List<ArticleVendu> select vendus throws BusinessException {
+//        	Connection cnx = ConnectionProvider.getConnection();
+//            List<ArticleVendu> articlesVendus = new ArrayList<>();
+//            try {
+//                String SELECT_VENDUS = "SELECT * FROM ARTICLES_VENDUS";
+//                PreparedStatement stmt = cnx.prepareStatement(SELECT_VENDUS);
+//                stmt.execute();
+//                ResultSet rs = stmt.getResultSet();
+//                while (rs.next()) {
+//                    articlesVendus.add(hydrateArticleVendu(rs));
+//                }
+//                cnx.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//                BusinessException BusinessException = new BusinessException();
+//                BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+//                throw BusinessException;        }
+//            return articlesVendus;
+//        }
         
         public void delete(ArticleVendu articleVendu) throws DALException {
         	Connection cnx = ConnectionProvider.getConnection();
@@ -135,8 +137,8 @@ public abstract class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
             stmt.setInt(5, articleVendu.setMiseAPrix(0));
             stmt.setInt(6, articleVendu.getPrixVente());
             stmt.setBoolean(7, articleVendu.isEtatVente());
-            stmt.setInt(8, articleVendu.getNo_utilisateur());
-            stmt.setInt(9, articleVendu.getNo_categorie());
+            stmt.setInt(8, articleVendu.getUtilisateur());
+            stmt.setInt(9, articleVendu.getCategorie());
         }
         private ArticleVendu hydrateArticleVendu(ResultSet rs) throws SQLException {
             return new ArticleVendu(

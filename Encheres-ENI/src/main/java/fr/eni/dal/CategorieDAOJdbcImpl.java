@@ -16,7 +16,7 @@ public abstract class CategorieDAOJdbcImpl implements DAOCategorie {
 	  public void insert(Categorie categorie) throws BusinessException {
 	    	 Connection cnx = ConnectionProvider.getConnection();
 	        try {
-	            String INSERT = "INSERT INTO CATEGORIES (no_categorie,libelle) VALUES (?, ?)";
+	            String INSERT = "INSERT INTO CATEGORIES (categorie,libelle) VALUES (?, ?)";
 	            PreparedStatement stmt = cnx.prepareStatement(INSERT);
 	            stmt.setInt(1, categorie.getNoCategorie());
 	            stmt.setString(2, categorie.getLibelle());
