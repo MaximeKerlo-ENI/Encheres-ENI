@@ -20,7 +20,7 @@
 		type="javax.sql.DataSource"
 		
 		url="jdbc:sqlserver://10.170.200.5;databasename=Enitrocenchere"
-		username="utilisateur"
+		username="sa"
 		password="Pa$$w0rd"
 		
 		maxTotal="100"
