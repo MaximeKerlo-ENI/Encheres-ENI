@@ -1,9 +1,13 @@
 package fr.eni.bll;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.bo.Utilisateur;
+import fr.eni.dal.DAOFactory;
+import fr.eni.dal.DAOUtilisateur;
+
 
 /**
  * Classe charger de gérer nos utilisateurs TODO : rajouter une couche DAO pour
@@ -11,30 +15,17 @@ import fr.eni.bo.Utilisateur;
  */
 public class UserManager {
 
-	private List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
-
-	/**
-	 * On initialise la liste des utilisateurs de l'application dans le constructeur
-	 */
-	public UserManager() {
-		Utilisateur user1 = new Utilisateur("cyril", "Pa$$w0rd", false); // idéalement il faudrait crypter le mot de passe
-		Utilisateur user2 = new Utilisateur("admin", "Pa$$w0rd", true); // idéalement il faudrait crypter le mot de passe
-		
-		utilisateurs.add(user1);
-		utilisateurs.add(user2);
-
-	}
-
-	/**
-	 * findByUsernameAndPassword() cherche si un utilisateur correspond au
-	 * username/password donnée en paramètre si non trouvé, retourne null
-	 */
-	public Utilisateur findByUsernameAndPassword(String username, String password) {
-		for (Utilisateur user : utilisateurs) {
-			if (user.getPseudo().equals(username) && user.getMotDePasse().equals(password)) {
-				return user;
-			}
+	private DAOUtilisateur daoUtilisateur = DAOFactory.getDAOUtilisateur();
+	
+	public void insert(Utilisateur utilisateur) {
+		try {
+			this.daoUtilisateur.insert(utilisateur);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return null; // on retourne null si non trouvé
 	}
 }
