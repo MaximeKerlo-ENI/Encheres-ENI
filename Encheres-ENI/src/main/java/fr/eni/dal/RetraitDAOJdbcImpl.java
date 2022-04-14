@@ -9,7 +9,7 @@ import java.util.List;
 import fr.eni.bll.BusinessException;
 import fr.eni.bo.Retrait;
 
-public abstract class RetraitDAOJdbcImpl implements DAO<Retrait>{
+public class RetraitDAOJdbcImpl implements DAO<Retrait>{
 
 
     /**
@@ -73,20 +73,19 @@ public abstract class RetraitDAOJdbcImpl implements DAO<Retrait>{
             throw BusinessException;
         }
     }
+	@Override
+	public Retrait selectById(int id) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Retrait> selectAll() throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /**
-     * Fill an instance from a ResultSet
-     * @param rs the ResultSet
-     * @return Retrait the instance
-     * @throws SQLException if the ResultSet doesn't match the different fields
-     */
-  //  private Retrait hydrateRetrait(ResultSet rs) throws BusinessException {
-       // return new Retrait(     		
-               // rs.getString("rue"),
-               // rs.getString("code_postal"),
-              //  rs.getString("ville"),
-               // rs.getInt("no_article")
-        //)
+  
+  
     }
 
 	

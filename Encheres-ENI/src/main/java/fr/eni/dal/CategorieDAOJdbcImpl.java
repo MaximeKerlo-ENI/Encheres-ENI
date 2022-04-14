@@ -10,7 +10,7 @@ import fr.eni.bll.BusinessException;
 import fr.eni.bo.Categorie;
 import fr.eni.bo.Enchere;
 
-public abstract class CategorieDAOJdbcImpl implements DAOCategorie {
+public  class CategorieDAOJdbcImpl implements DAOCategorie {
 	
 	
 	  public void insert(Categorie categorie) throws BusinessException, SQLException {
