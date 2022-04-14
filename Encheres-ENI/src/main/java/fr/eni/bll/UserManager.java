@@ -8,7 +8,6 @@ import fr.eni.bo.Utilisateur;
 import fr.eni.dal.DAOFactory;
 import fr.eni.dal.DAOUtilisateur;
 
-
 /**
  * Classe charger de gérer nos utilisateurs TODO : rajouter une couche DAO pour
  * stocker les utilisateurs dans une base de donnée
@@ -28,4 +27,19 @@ public class UserManager {
 			e.printStackTrace();
 		}
 	}
+	
+	 public Utilisateur selectPseudoPwd(String pseudo, String password) {
+		 Utilisateur user = new Utilisateur();
+	 
+		 try {
+			user = this.daoUtilisateur.selectPseudoPwd(pseudo, password);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	 }
 }
