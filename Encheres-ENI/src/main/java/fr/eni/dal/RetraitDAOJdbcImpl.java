@@ -9,7 +9,7 @@ import java.util.List;
 import fr.eni.bll.BusinessException;
 import fr.eni.bo.Retrait;
 
-public class RetraitDAOJdbcImpl implements DAO<Retrait>{
+public abstract class RetraitDAOJdbcImpl implements DAO<Retrait>{
 
 
     /**
