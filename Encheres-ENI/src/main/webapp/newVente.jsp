@@ -60,7 +60,7 @@
 			</div><br>
 			<!-- boutons enregistrer/annuler -->
 			<button class="btn btn-primary" type="submit" name="enregistrer">Enregistrer</button>
-			<button class="btn btn-primary" type="submit" name="annuler">Annuler</button>
+			<a href="./" class="btn btn-primary">Annuler</a>
 			<!-- bouton delete vente ici -->		
 		</div>
 	</div>

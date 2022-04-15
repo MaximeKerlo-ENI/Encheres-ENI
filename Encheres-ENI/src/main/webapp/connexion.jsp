@@ -16,9 +16,9 @@
 	<!-- on affiche les éventuelles erreurs -->
 	<p class="erreur">${erreur}</p>
 
-	<form action="./connexion" method="post">
+	<form action="./ServletNewprofile" method="post">
 		<div class="container text-center mx-auto px-auto">
-			<label>Identifiant : </label>
+			<label>Pseudo : </label>
 			<input type="text" name="username"/>
 		</div>
 		<br>
@@ -32,20 +32,20 @@
 			<button type="submit" class="btn btn-primary">Connexion</button>
 		</div>
 	</form>
+	<div class="container text-center mx-auto pe-5 ps-0">
+		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+		<label class="form-check-label" for="flexCheckDefault">
+		Se souvenir de moi
+		</label>
+	</div>
+	<div class="container text-center mx-auto pe-5 ps-0">
+		<a href="">Mot de passe oublié?</a>
+	</div>
+		
+	<form action="./ServletNewProfile" method="GET">
 		<div class="container text-center mx-auto pe-5 ps-0">
-			<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-			<label class="form-check-label" for="flexCheckDefault">
-			Se souvenir de moi
-			</label>
+			<button type="submit" class="btn btn-primary">Créer un nouveau compte</button>	
 		</div>
-		<div class="container text-center mx-auto pe-5 ps-0">
-			<a href="">Mot de passe oublié?</a>
-		</div>
-	
-		<div class="container text-center mx-auto pe-5 ps-0">
-			<a href="./newProfile.jsp" class="btn btn-primary">Créer un nouveau compte</a>
-		</div>
-	
-
+	</form>
 </body>
 </html>
