@@ -13,7 +13,7 @@ public interface DAOEnchere extends DAO<Enchere>  {
 	void insert(Enchere enchere) throws BusinessException, SQLException;
 	List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String etat_vente) throws BusinessException, SQLException;
 	List<Integer> getNoArticlesWonByUtilisateur(Utilisateur utilisateur) throws BusinessException, SQLException;
-	HashMap<Integer, Integer> getAmountAndPseudoOfBestOffer(ArticleVendu articleVendu) throws BusinessException, SQLException;
+	HashMap<Integer, Integer> getAmountAndPseudoOfBestOffer(ArticleVendu articleVendu) throws DalException;
 	Enchere selectById(int id) throws BusinessException;
 	List<Enchere> selectAll() throws BusinessException;
 	void update(Enchere enchere) throws BusinessException;
