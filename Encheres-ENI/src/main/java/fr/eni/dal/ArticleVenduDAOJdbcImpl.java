@@ -71,13 +71,13 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
             return articlesVendus;
         }
         
-        public List<Integer> filterByEtat(String etat) throws BusinessException, SQLException {
+        public List<Integer> filterByEtat(String etat_vente) throws BusinessException, SQLException {
         	Connection cnx = ConnectionProvider.getConnection();
             List<Integer> articlesVendus = new ArrayList<>();
             try {
                 String SELECT_BY_ETAT = "SELECT AV.no_article FROM ARTICLES_VENDUS AV WHERE AV.etat_vente = ?";
                 PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_ETAT);
-                stmt.setString(1, etat);
+                stmt.setString(1, etat_vente);
                 stmt.execute();
                 ResultSet rs = stmt.getResultSet();
                 while (rs.next()) {
@@ -128,7 +128,45 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
         
     }
 
-	
+      
+        public List<ArticleVendu> filtrerparnom(String filter) throws BusinessException, SQLException {
+        	Connection cnx = ConnectionProvider.getConnection();
+            List<ArticleVendu> articlesVendus = new ArrayList<>();
+            try {
+                String SELECT_BY_NAME_SEARCH = "SELECT * " +
+                        "FROM ARTICLES_VENDUS " +
+                        "WHERE nom_article LIKE ?";
+                PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_NAME_SEARCH);
+                stmt.setString(1, "%" + filter + "%");
+                stmt.execute();
+                ResultSet rs = stmt.getResultSet();
+                while(rs.next()) {
+                    articlesVendus.add(hydrateArticleVendu(rs));
+                }
+                cnx.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                BusinessException  BusinessException = new  BusinessException();
+                BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+                throw  BusinessException;
+            }
+            return articlesVendus;
+        }
+		@Override
+		public ArticleVendu selectById(int id) throws BusinessException, SQLException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public List<ArticleVendu> selectAll() throws BusinessException, SQLException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public void update(ArticleVendu var) throws BusinessException, SQLException {
+			// TODO Auto-generated method stub
+			
+		}
 	
 	
 	

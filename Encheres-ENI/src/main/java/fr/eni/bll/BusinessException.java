@@ -17,7 +17,7 @@ public class BusinessException extends Exception {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static void addError(int errorSqlInsert) {
+	public void addError(int errorSqlInsert) {
 		// TODO Auto-generated method stub
 		
 	}
