@@ -49,8 +49,10 @@ public class ServletNewProfile extends HttpServlet {
 		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp, 100, false);
 		
 		try {
-			this.userManager.insert(user);
-			request.setAttribute("messageConfirmation", "utilisateur ajouté : " + user);
+			if(mdp.equals(mdp_confirm)) {
+				this.userManager.insert(user);
+				request.setAttribute("messageConfirmation", "utilisateur ajouté : " + user);
+			}		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
