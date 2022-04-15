@@ -50,7 +50,6 @@ public class Utilisateur {
 	}
 
 	public Utilisateur(String pseudo, String motDePasse, boolean administrateur) {
-		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 		this.administrateur = administrateur;
