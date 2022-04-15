@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.bll.UserManager;
 import fr.eni.bo.Utilisateur;
 
 /**
@@ -15,7 +16,7 @@ import fr.eni.bo.Utilisateur;
 @WebServlet("/ServletNewProfile")
 public class ServletNewProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private UserManager userManager = new UserManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,6 +47,14 @@ public class ServletNewProfile extends HttpServlet {
 		String mdp = request.getParameter("pwd");
 		String mdp_confirm = request.getParameter("confirm");
 		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp, 100, false);
+		
+		try {
+			this.userManager.insert(user);
+			request.setAttribute("messageConfirmation", "utilisateur ajouté : " + user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("/WEB-INF/ajout.jsp").forward(request, response);
 	}
-
 }

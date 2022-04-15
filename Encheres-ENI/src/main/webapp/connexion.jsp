@@ -16,7 +16,7 @@
 	<!-- on affiche les éventuelles erreurs -->
 	<p class="erreur">${erreur}</p>
 
-	<form action="./ServletNewprofile" method="post">
+	<form action="./connexion" method="post">
 		<div class="container text-center mx-auto px-auto">
 			<label>Pseudo : </label>
 			<input type="text" name="username"/>
