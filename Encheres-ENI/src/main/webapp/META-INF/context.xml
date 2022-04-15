@@ -19,7 +19,7 @@
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 		type="javax.sql.DataSource"
 		
-		url="jdbc:sqlserver://10.170.200.5;databasename=Enitrocenchere"
+		url="jdbc:sqlserver://10.170.200.5;databasename=Enitroenchere"
 		username="sa"
 		password="Pa$$w0rd"
 		
