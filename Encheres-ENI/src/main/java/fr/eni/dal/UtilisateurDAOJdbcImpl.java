@@ -45,7 +45,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
     	Connection cnx = ConnectionProvider.getConnection();
         Utilisateur utilisateur = null;
         try {
-            String SELECTPseudoPwd = "SELECT (pseudo, mot_de_passe) FROM UTILISATEURS "
+            String SELECTPseudoPwd = "SELECT pseudo, mot_de_passe FROM UTILISATEURS "
             		+ "WHERE pseudo = ? AND mot_de_passe=?";
             		
             	
