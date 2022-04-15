@@ -3,6 +3,7 @@ package fr.eni.dal;
 import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -124,13 +125,15 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
      * Second value is the id of the user that had made the current best auction
      * @param articleVendu The auction that we want to get the best offer
      * @return HashMap<Integer, Integer> <amount, user_id>
+     * @throws DalException 
      * @throws SQLException 
      * @throws DALException If there is an issue with the SQL query
      */
-    public HashMap<Integer, Integer> getAmountAndPseudoOfBestOffer(ArticleVendu articleVendu) throws BusinessException, SQLException {
-    	Connection cnx = ConnectionProvider.getConnection();
+    public HashMap<Integer, Integer> getAmountAndPseudoOfBestOffer(ArticleVendu articleVendu) throws DalException  {
+    	
         HashMap<Integer, Integer> result = new HashMap<>();
-        try {
+        
+        try (Connection cnx = ConnectionProvider.getConnection()){
             String GET_UTILISATEUR_AND_BEST_AUCTIONS = "SELECT no_utilisateur, " +
                     "       montant_enchere " +
                     "       FROM ( " +
@@ -151,13 +154,11 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
             } else {
                 result = null;
             }
-            cnx.close();
+            //cnx.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw BusinessException;
+            DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw dalException;
         }
         return result;
     }

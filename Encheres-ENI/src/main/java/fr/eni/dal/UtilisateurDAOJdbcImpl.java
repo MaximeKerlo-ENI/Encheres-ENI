@@ -39,6 +39,8 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             ResultSet rs = pStmt.getGeneratedKeys();
             if (rs.next()) {
                 utilisateur.setNoUtilisateur(rs.getInt(1));
+                
+               
             }
             cnx.close();
         } catch (SQLException e) {
