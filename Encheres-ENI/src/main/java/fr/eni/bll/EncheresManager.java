@@ -18,6 +18,7 @@ import fr.eni.dal.DAOFactory;
 public class EncheresManager {
 	// attribut qui contient la référence vers notre couche DAL (ajout base de
 	// donnée)
+	private DAOEnchere enchereDAO = DAOEnchere.get
 	private DAOEnchere enchereDAO = DAOEnchere.getEnchereDAO();
 
 	/**

@@ -13,7 +13,7 @@ public class Utilisateur {
 	private String codePostal;
 	private String ville;
 	private String motDePasse;
-	private int credit = 100;
+	private int credit = 100; // crédit de 100 attibué à l'inscription
 	private boolean administrateur = false;
 	private ArrayList<ArticleVendu> listeArticleVendu;
 	private ArrayList<Enchere> listEnchere;
