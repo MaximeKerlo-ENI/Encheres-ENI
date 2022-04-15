@@ -40,7 +40,7 @@ public class ConnexionServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		// 2 - on va chercher dans notre base d'utilisateur si un utilisateur correspond
-		Utilisateur utilisateur = userManager.findByUsernameAndPassword(username, password);
+		Utilisateur utilisateur = userManager.selectPseudoPwd(username, password);
 		
 		// si jamais utilisateur non trouvé
 		if (utilisateur == null) {
@@ -53,6 +53,7 @@ public class ConnexionServlet extends HttpServlet {
 			// l'objet HttpSession est le même dans TOUS les servlets de l'application, mais différent pour chaque utilisateur
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateurConnecte", utilisateur);
+			System.out.println(utilisateur.getPseudo());
 			response.sendRedirect("./");
 		}
 	}
