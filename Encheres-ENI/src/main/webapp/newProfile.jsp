@@ -2,22 +2,20 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
 <jsp:include page="./WEB-INF/include/head.jsp">
 	<jsp:param name="titre" value="Nouveau profil" />
 </jsp:include>
-<title>Nouveau profile</title>
-</head>
 <body>
 	<div class="row ms-5 mt-3">
 		<div class="col-6">
-			<h3>ENI-Encheres</h3>
+			<img alt="" src="./img/logo_ENI.jpg" width="50" height="50">
+			<strong>ENI-Encheres</strong>
 		</div>
 	</div>
 	
 	<h1 class="text-center">Nouveau profil</h1>
 	
-	<form action="./newProfile" method="post">
+	<form action="./ServletNewProfile" method="post">
 		<div class="row">
 			<div class="container text-center">
 				<label class="mt-3">Pseudo : </label>

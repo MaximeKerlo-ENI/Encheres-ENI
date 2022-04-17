@@ -9,7 +9,8 @@
 <body>
 	<div class="row ms-5 mt-3">
 		<div class="col-6">
-			<h3>ENI-Encheres</h3>
+			<img alt="" src="./img/logo_ENI.jpg" width="50" height="50">
+			<strong>ENI-Encheres</strong>
 		</div>
 	</div>
 		
