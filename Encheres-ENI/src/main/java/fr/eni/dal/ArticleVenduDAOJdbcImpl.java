@@ -31,7 +31,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
             stmt.setDate(4,Date.valueOf(articleVendu.getDateFinEncheres()));
             stmt.setInt(5,articleVendu.getMiseAPrix() );
             stmt.setInt(6,articleVendu.getPrixVente());
-            stmt.setBoolean(7,articleVendu.isEtatVente());
+            stmt.setString(7,articleVendu.getEtatVente());
             stmt.setInt(8,articleVendu.getUtilisateur().getNoUtilisateur());
             stmt.setInt(9,articleVendu.getCategorie().getNoCategorie());
             stmt.execute();
@@ -263,7 +263,7 @@ public void updateCurrentPrice(int noArticle, int newPrice) throws DalException 
             stmt.setDate(4,Date.valueOf(articleVendu.getDateFinEncheres()));
             stmt.setInt(5,articleVendu.getMiseAPrix() );
             stmt.setInt(6, articleVendu.getPrixVente());
-            stmt.setBoolean(7, articleVendu.isEtatVente());
+            stmt.setString(7, articleVendu.getEtatVente());
             stmt.setInt(8,articleVendu.getUtilisateur().getNoUtilisateur());
             stmt.setInt(9,articleVendu.getCategorie().getNoCategorie());
             cnx.close();
