@@ -17,9 +17,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
      * @throws SQLException 
      * @throws DALException if the SQL INSERT request is wrong
      */
-    public void insert(Utilisateur utilisateur) throws BusinessException, SQLException {
-        Connection cnx = ConnectionProvider.getConnection();
-        try {
+    public void insert(Utilisateur utilisateur) throws DalException{
+        
+        try (Connection cnx = ConnectionProvider.getConnection()){
             String INSERT = "INSERT INTO UTILISATEURS " +
                     "(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -44,20 +44,20 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             }
             cnx.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_INSERT);
-            throw BusinessException;
+        	  e.printStackTrace();
+              DalException dalException = new DalException();
+              dalException.addError(ErrorCodesDAL.ERROR_SQL_INSERT);
+              throw dalException;
         }
     }
 
   
     
-    @SuppressWarnings("static-access")
-	public Utilisateur selectPseudoPwd(String pseudo, String password) throws BusinessException, SQLException {
-    	Connection cnx = ConnectionProvider.getConnection();
+    
+	public Utilisateur selectPseudoPwd(String pseudo, String password) throws DalException {
+    	
         Utilisateur utilisateur = null;
-        try {
+        try (Connection cnx = ConnectionProvider.getConnection()){
             String SELECTPseudoPwd = "SELECT pseudo, mot_de_passe FROM UTILISATEURS "
             		+ "WHERE pseudo = ? AND mot_de_passe=?";
             		
@@ -67,15 +67,13 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             stmt.setString(2, password);
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
-            if (rs.next()) {
-                utilisateur = hydrateUtilisateur(rs);
-            }
+            
             cnx.close();
         	} catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw BusinessException;
+        		 e.printStackTrace();
+                 DalException dalException = new DalException();
+                 dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+                 throw dalException;
         }
         return utilisateur;
     }
@@ -87,10 +85,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
      * @throws SQLException 
      * @throws DALException if the SQL SELECT request is wrong
      */
-    public HashMap<Integer, String> selectUtilisateursWithCurrentAuction() throws BusinessException, SQLException {
-    	Connection cnx = ConnectionProvider.getConnection();
+    public HashMap<Integer, String> selectUtilisateursWithCurrentAuction() throws DalException {
+    
         HashMap<Integer, String> pseudos = new HashMap<> ();
-        try {
+        try (Connection cnx = ConnectionProvider.getConnection()){
             String SELECT_USERS_WITH_CURRENT_AUCTIONS =
                     "SELECT AV.no_article, pseudo " +
                     "FROM UTILISATEURS " +
@@ -103,10 +101,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             }
             cnx.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw BusinessException;
+        	 e.printStackTrace();
+             DalException dalException = new DalException();
+             dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+             throw dalException;
         }
         return pseudos;
     }
@@ -119,20 +117,20 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
      */
     
    // @Override
-    public List<Utilisateur> selectAll() throws BusinessException,SQLException  {
-    	Connection cnx = ConnectionProvider.getConnection();
+    public List<Utilisateur> selectAll() throws DalException   {
+    	
         List<Utilisateur> utilisateurs = new ArrayList<>();
-        try {
+        try (Connection cnx = ConnectionProvider.getConnection()){
             Statement stmt = cnx.createStatement();
             String SELECT_ALL = "SELECT * FROM UTILISATEURS";
             stmt.execute(SELECT_ALL);
             ResultSet rs = stmt.getResultSet();
             
         } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw BusinessException;
+        	e.printStackTrace();
+            DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw dalException;
         }
         return utilisateurs;
     }
@@ -143,9 +141,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
  
 
    
-    public void updateCredit(int noUtilisateur, int newCredit) throws BusinessException, SQLException {
-    	Connection cnx = ConnectionProvider.getConnection();
-        try {
+    public void updateCredit(int noUtilisateur, int newCredit) throws DalException {
+    	
+        try (Connection cnx = ConnectionProvider.getConnection()){
             String UPDATE_CREDIT = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
             PreparedStatement stmt = cnx.prepareStatement(UPDATE_CREDIT);
             stmt.setInt(1, newCredit);
@@ -153,10 +151,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_UPDATE);
-            throw BusinessException;
+        	e.printStackTrace();
+            DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_UPDATE);
+            throw dalException;
         }
     }
 
@@ -165,9 +163,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
      * @param utilisateur Utilisateur the instance filled with the noUtilisateur to delete
      * @throws SQLException 
      */
-    public void delete(Utilisateur utilisateur) throws BusinessException, SQLException {
-    	Connection cnx = ConnectionProvider.getConnection();
-        try {
+    public void delete(Utilisateur utilisateur) throws DalException{
+    	
+        try (Connection cnx = ConnectionProvider.getConnection()){
             String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?;" ;
             PreparedStatement stmt = cnx.prepareStatement(DELETE);
             stmt.setInt(1, utilisateur.getNoUtilisateur());
@@ -175,39 +173,47 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_DELETE);
-            throw BusinessException;
+        	e.printStackTrace();
+            DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_DELETE);
+            throw dalException;
         }
     }
 
     
 
-    public Utilisateur hydrateUtilisateur(ResultSet rs) throws BusinessException, SQLException {
-        return new Utilisateur(
-                rs.getInt("no_utilisateur"),
-                rs.getString("pseudo"),
-                rs.getString("nom"),
-                rs.getString("prenom"),
-                rs.getString("email"),
-                rs.getString("telephone"),
-                rs.getString("rue"),
-                rs.getString("code_postal"),
-                rs.getString("ville"),
-                rs.getString("mot_de_passe"),
-                rs.getInt("credit"),
-                rs.getBoolean("administrateur")
-        );
+    public Utilisateur hydrateUtilisateur(ResultSet rs) throws DalException{
+        try {
+			return new Utilisateur(
+			        rs.getInt("no_utilisateur"),
+			        rs.getString("pseudo"),
+			        rs.getString("nom"),
+			        rs.getString("prenom"),
+			        rs.getString("email"),
+			        rs.getString("telephone"),
+			        rs.getString("rue"),
+			        rs.getString("code_postal"),
+			        rs.getString("ville"),
+			        rs.getString("mot_de_passe"),
+			        rs.getInt("credit"),
+			        rs.getBoolean("administrateur")
+			);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+            DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw dalException;
+		}
     }
 
   
 
   
-    public boolean checkForUniquePseudoAndMail(String pseudo, String mail) throws BusinessException, SQLException {
-    	Connection cnx = ConnectionProvider.getConnection();
+    public boolean checkForUniquePseudoAndMail(String pseudo, String mail) throws DalException {
+    	
         boolean isUnique = true;
-        try {
+        try (Connection cnx = ConnectionProvider.getConnection()){
             String CHECK_IF_PSEUDO_AND_MAIL_ALREADY_EXIST =
                     "SELECT * FROM UTILISATEURS " +
                     "WHERE pseudo LIKE ? OR email LIKE ?;";
@@ -221,10 +227,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             }
             cnx.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw BusinessException;
+        	e.printStackTrace();
+            DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw dalException;
         }
         return isUnique;
     }
@@ -236,10 +242,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
      * @throws SQLException 
      * @throws DALException If the SQL request is wrong
      */
-    public boolean checkForUniquePseudo(String pseudo) throws BusinessException, SQLException {
-    	Connection cnx = ConnectionProvider.getConnection();
+    public boolean checkForUniquePseudo(String pseudo) throws DalException {
+    	
         boolean isUnique = true;
-        try {
+        try(Connection cnx = ConnectionProvider.getConnection()) {
             String CHECK_IF_PSEUDO_ALREADY_EXIST =
                     "SELECT * FROM UTILISATEURS " +
                             "WHERE pseudo LIKE ?;";
@@ -252,10 +258,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             }
             cnx.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-            throw BusinessException;
+        	e.printStackTrace();
+            DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw dalException;
         }
         return isUnique;
     }
@@ -270,9 +276,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
   
 
     @Override
-    public void update(Utilisateur utilisateur) throws BusinessException, SQLException {
-    	Connection cnx = ConnectionProvider.getConnection();
-        try {
+    public void update(Utilisateur utilisateur) throws DalException{
+    	
+        try (Connection cnx = ConnectionProvider.getConnection()){
             String UPDATE = "UPDATE UTILISATEURS SET " +
                     "                        pseudo = ?, " +
                     "                        nom = ?, " +
@@ -295,10 +301,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             stmt.executeUpdate();
             cnx.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            BusinessException BusinessException = new BusinessException();
-            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_UPDATE);
-            throw BusinessException;
+        	e.printStackTrace();
+            DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_UPDATE);
+            throw dalException;
         }
     }
 
@@ -321,10 +327,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 
 
-		  public Utilisateur selectlesId(int no_utilisateur) throws BusinessException, SQLException {
-			  Connection cnx = ConnectionProvider.getConnection();
+		  public Utilisateur selectlesId(int no_utilisateur) throws DalException {
+			  
 		        Utilisateur utilisateur = null;
-		        try {
+		        try (Connection cnx = ConnectionProvider.getConnection()){
 		            String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 		            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_ID);
 		            stmt.setInt(1, no_utilisateur);
@@ -335,10 +341,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		            }
 		            cnx.close();
 		        } catch (SQLException e) {
-		            e.printStackTrace();
-		            BusinessException BusinessException = new BusinessException();
-		            BusinessException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-		            throw BusinessException;
+		        	e.printStackTrace();
+		            DalException dalException = new DalException();
+		            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+		            throw dalException;
 		        }
 		        return utilisateur;
 		    }
@@ -346,10 +352,27 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 
 		@Override
-		public Utilisateur selectById(int id) throws BusinessException, SQLException {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		public Utilisateur selectById(int id) throws DalException {
+			 
+		        Utilisateur utilisateur = null;
+		        try (Connection cnx = ConnectionProvider.getConnection()){
+		            String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
+		            PreparedStatement stmt = cnx.prepareStatement(SELECT_BY_ID);
+		            stmt.setInt(1, id);
+		            stmt.execute();
+		            ResultSet rs = stmt.getResultSet();
+		            if (rs.next()) {
+		                utilisateur = hydrateUtilisateur(rs);
+		            }
+		            cnx.close();
+		        } catch (SQLException e) {
+		        	e.printStackTrace();
+		            DalException dalException = new DalException();
+		            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+		            throw dalException;
+		        }
+		        return utilisateur;
+		    }
 		
 	}
 	

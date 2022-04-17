@@ -1,25 +1,43 @@
 package fr.eni.dal;
 
-/**
- * Exception personnalisée qu'on enverra si erreurs de validation L'avantage
- * d'utiliser nos propres exceptions : on sait que le message à l'interieur est
- * compréhensible par l'utilisateur (et donc on peut l'afficher sans soucis dans
- * nos jsps)
- */
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DalException extends Exception {
+    private static final long serialVersionUID = 1L;
+    private List<Integer> listErrorCodes;
+    
+    public DalException() {
+        super();
+        this.listErrorCodes=new ArrayList<>();
+    }
 
-	public DalException() {
-		// TODO Auto-generated constructor stub
-	}
+  
+    public void addError(int code)
+    {
+        if(!this.listErrorCodes.contains(code))
+        {
+            this.listErrorCodes.add(code);
+        }
+    }
 
-	public DalException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * Returns true if the instance contains error codes and false if not
+     * @return boolean
+     */
+    public boolean hasErrors()
+    {
+        return this.listErrorCodes.size()>0;
+    }
 
-	public void addError(int errorSqlInsert) {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * Returns the list of the error codes stored in the instance
+     * @return List
+     */
+    public List<Integer> getListErrorCodes()
+    {
+        return this.listErrorCodes;
+    }
 
 }

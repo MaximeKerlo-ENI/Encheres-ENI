@@ -8,11 +8,11 @@ import fr.eni.bo.ArticleVendu;
 
 public interface DAO<T> {
 	
-	void insert(T var) throws BusinessException, SQLException;
-    T selectById(int id) throws BusinessException, SQLException;
-    List<T> selectAll() throws BusinessException, SQLException;
-    void update(T var) throws BusinessException, SQLException;
-    void delete(T var) throws BusinessException, SQLException;
+	void insert(T var) throws  DalException;
+    T selectById(int id) throws  DalException;
+    List<T> selectAll() throws DalException;
+    void update(T var) throws DalException;
+    void delete(T var) throws  DalException;
 	
 }
 	

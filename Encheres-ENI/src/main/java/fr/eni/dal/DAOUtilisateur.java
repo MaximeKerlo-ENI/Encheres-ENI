@@ -11,18 +11,17 @@ import fr.eni.bo.Utilisateur;
 
 public interface DAOUtilisateur extends DAO<Utilisateur> {
 	
-	void insert(Utilisateur utilisateur) throws BusinessException, SQLException;
-	
-	Utilisateur selectPseudoPwd(String pseudo, String password) throws BusinessException, SQLException;
-	HashMap<Integer, String> selectUtilisateursWithCurrentAuction() throws BusinessException, SQLException;
-	Utilisateur selectlesId(int id) throws BusinessException, SQLException;
-	List<Utilisateur> selectAll() throws BusinessException,SQLException;
-	void updateCredit(int noUtilisateur, int newCredit) throws BusinessException, SQLException;
-	void delete(Utilisateur utilisateur) throws BusinessException, SQLException;
-	Utilisateur hydrateUtilisateur(ResultSet rs) throws BusinessException, SQLException;
-	boolean checkForUniquePseudoAndMail(String pseudo, String mail) throws BusinessException, SQLException;
-	 boolean checkForUniquePseudo(String pseudo) throws BusinessException, SQLException;
-	 void update(Utilisateur utilisateur) throws BusinessException, SQLException;
-	 void fillPreparedStatement(Utilisateur utilisateur, PreparedStatement stmt) throws SQLException ;
-	 Utilisateur selectById(int id) throws BusinessException, SQLException;
+	void insert(Utilisateur utilisateur) throws DalException;
+	Utilisateur selectPseudoPwd(String pseudo, String password) throws DalException;
+	HashMap<Integer, String> selectUtilisateursWithCurrentAuction() throws DalException;
+	List<Utilisateur> selectAll() throws DalException;
+	void updateCredit(int noUtilisateur, int newCredit) throws DalException;
+	void delete(Utilisateur utilisateur) throws DalException;
+	Utilisateur hydrateUtilisateur(ResultSet rs) throws DalException;
+	boolean checkForUniquePseudoAndMail(String pseudo, String mail) throws DalException;
+	boolean checkForUniquePseudo(String pseudo) throws DalException;
+	void update(Utilisateur utilisateur) throws DalException;
+	void fillPreparedStatement(Utilisateur utilisateur, PreparedStatement stmt) throws SQLException;
+	Utilisateur selectlesId(int no_utilisateur) throws DalException;
+	Utilisateur selectById(int id) throws DalException;
 }
