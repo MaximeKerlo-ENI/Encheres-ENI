@@ -104,20 +104,19 @@
 	</section>
 	<br>
 	<div class="row container">
-	<!-- foreach -->
+	<c:forEach var="article" items="${listeArticles}"></c:forEach>
 		<div class="col-6 mb-3">
 			<div class="card">
 				<div class="card-body">
 				 	<img class="card-img-top" src="..."><br>
-					<label><b>${nomArticle}</b></label><br>
-					<label>Prix : </label><label>${prix}</label><br>
-					<label>Fin de l'enchère : </label><label>${dateFin}</label><br>
-					<label>Vendeur : </label><label>${vendeur}</label>
+					<label><b>${article.nomArticle}</b></label><br>
+					<label>Prix : </label><label>${article.prix}</label><br>
+					<label>Fin de l'enchère : </label><label>${article.dateFin}</label><br>
+					<label>Vendeur : </label><a href=""><label>${article.vendeur}</label></a>
 				</div>
 			</div>
 		</div>
 		<!-- fin foreach -->
 	</div>
-	
 </body>
 </html>
