@@ -8,7 +8,8 @@
 <body>
 	<div class="row ms-5 mt-3">
 		<div class="col-6">
-			<h3>ENI-Encheres</h3>
+			<img alt="" src="./img/logo_ENI.jpg" width="50" height="50">
+			<strong>ENI-Encheres</strong>
 		</div>
 		<div class="col-5 text-end">
 			<%@ include file="./WEB-INF/include/connection-status.jsp"%>
@@ -19,7 +20,7 @@
 	
 	<div class="row">
 		<div class="col-3 ms-5 mt-3">
-			Photo article ici
+			<img src="...">
 		</div>
 		<div class="col-4 ms-5 mt-3">
 			<!-- nom article -->
@@ -31,11 +32,11 @@
 			<!-- categorie article -->
 			<label>Catégorie</label>
 			<select class="w-75" name="categorie">
-				<option>placeholder
+				<option>${libelle}</option>
 			</select><br><br>
 			<!-- upload photo article -->
 			<label>Photo de l'article</label>
-			<button class="btn btn-primary" name="upload">Charger image</button><br><br>
+			<button class="btn btn-success" name="upload">Charger image</button><br><br>
 			<!-- mise à prix article -->
 			<label>Mise à prix : </label>
 			<input type="number" name="price"><br><br>
@@ -49,13 +50,13 @@
 			<label>Retrait</label>
 			<div class="border border-dark"><br>
 				<!-- rue retrait -->
-				<label>Rue : </label>
+				<label class="ms-2">Rue : </label>
 				<input type="text" name="rue"><br><br>
 				<!-- code postal retrait -->
-				<label>Code postal : </label>
-				<input type="text" name="cpo"><br><br>
+				<label class="ms-2">Code postal : </label>
+				<input class="w-25" type="text" name="cpo"><br><br>
 				<!-- ville retrait -->
-				<label>Ville : </label>
+				<label class="ms-2">Ville : </label>
 				<input type="text" name="ville"><br><br>
 			</div><br>
 			<!-- boutons enregistrer/annuler -->

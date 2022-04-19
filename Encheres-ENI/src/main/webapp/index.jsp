@@ -8,7 +8,8 @@
 <body>
 	<div class="row ms-5 mt-3">
 		<div class="col-6">
-			<h3>ENI-Encheres</h3>
+			<img alt="" src="./img/logo_ENI.jpg" width="50" height="50">
+			<strong>ENI-Encheres</strong>	
 		</div>
 		<div class="col-5 text-end">
 			<%@ include file="./WEB-INF/include/connection-status.jsp"%>
@@ -29,7 +30,9 @@
 		</div><br>
 		<label>Catégorie : </label>
 		<select class="form-select" aria-label="Default select example">
-			<option>placeholder
+			<!-- foreach -->
+			<option>${libelle}</option>
+			<!-- fin foreach -->
 		</select>				
 	</div>
 	<div class="container col-5">
@@ -95,32 +98,25 @@
 			</div>
 		</c:when>
 		<c:otherwise>
-		
+			<div></div>
 		</c:otherwise>
 		</c:choose>	
 	</section>
 	<br>
-	<div class="row">
-		<div class="container col-5">
+	<div class="row container">
+	<!-- foreach -->
+		<div class="col-6 mb-3">
 			<div class="card">
 				<div class="card-body">
-					<label><b>[PLACEHOLDER] Nom article</b></label><br>
-					<label>Prix : </label><br>
-					<label>Fin de l'enchère : </label><br>
-					<label>Vendeur : </label>
+				 	<img class="card-img-top" src="..."><br>
+					<label><b>${nomArticle}</b></label><br>
+					<label>Prix : </label><label>${prix}</label><br>
+					<label>Fin de l'enchère : </label><label>${dateFin}</label><br>
+					<label>Vendeur : </label><label>${vendeur}</label>
 				</div>
 			</div>
 		</div>
-		<div class="container col-5">
-			<div class="card">
-				<div class="card-body">
-					<label><b>[PLACEHOLDER] Nom article</b></label><br>
-					<label>Prix : </label><br>
-					<label>Fin de l'enchère : </label><br>
-					<label>Vendeur : </label>
-				</div>
-			</div>
-		</div>
+		<!-- fin foreach -->
 	</div>
 	
 </body>

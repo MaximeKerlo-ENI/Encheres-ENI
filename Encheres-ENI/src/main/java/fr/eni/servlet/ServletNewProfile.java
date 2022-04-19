@@ -62,6 +62,6 @@ public class ServletNewProfile extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("/WEB-INF/ajout.jsp").forward(request, response);
+		request.getRequestDispatcher("./").forward(request, response);
 	}
 }
