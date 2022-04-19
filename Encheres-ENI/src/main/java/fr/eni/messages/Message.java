@@ -5,14 +5,14 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
-import org.omg.CORBA.portable.InputStream;
 
 public abstract class Message{
 	    private static Properties props;
 
 	    static {
+	    	
 	        try {
-	            java.io.InputStream utf8in = Message.class.getClassLoader().getResourceAsStream("fr/eni/messages/error_messages.properties");
+	            java.io.InputStream utf8in = Message.class.getClassLoader().getResourceAsStream("/fr/eni/messages/erreur_messages.properties");
 	            Reader reader = new InputStreamReader( utf8in, StandardCharsets.UTF_8);
 	            props = new Properties();
 	            props.load(reader);
