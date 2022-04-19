@@ -12,13 +12,7 @@ public class CategorieManager {
 
 	private DAOCategorie daoCategorie = DAOFactory.getDAOCategorie();
 
-	public void insert(Categorie categorie) throws DalException {
-		try {
-			this.daoCategorie.insert(categorie);
-		} catch (DalException e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	public void update(Categorie categorie) throws DalException {
 		try {
