@@ -2,11 +2,12 @@ package fr.eni.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-
+import fr.eni.bo.ArticleVendu;
 import fr.eni.bo.Retrait;
 
 public class RetraitDAOJdbcImpl implements DAO<Retrait>{
@@ -17,7 +18,7 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
         try (Connection cnx = ConnectionProvider.getConnection()){
             String INSERT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = cnx.prepareStatement(INSERT);
-            stmt.setInt(1, retrait.getArticle().getNoArticle());
+       
             stmt.setString(2, retrait.getRue());
             stmt.setString(3, retrait.getCode_postal());
             stmt.setString(4, retrait.getVille());
@@ -40,7 +41,7 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
             stmt.setString(1, retrait.getRue());
             stmt.setString(2, retrait.getCode_postal());
             stmt.setString(3, retrait.getVille());
-            stmt.setInt(4, retrait.getArticle().getNoArticle());
+     
             stmt.executeUpdate();
             
         } catch (SQLException e) {
@@ -56,9 +57,9 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
         String DELETE = "DELETE FROM RETRAITS WHERE no_article = ? ";
         try (Connection cnx = ConnectionProvider.getConnection()){
             PreparedStatement stmt = cnx.prepareStatement(DELETE);
-            stmt.setInt(1, retrait.getArticle().getNoArticle());
+           
             stmt.executeUpdate();
-           ;
+         
         } catch (SQLException e) {
         	e.printStackTrace();
         	DalException dalException = new DalException();
@@ -69,7 +70,28 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
 
 	@Override
 	public List<Retrait> selectAll() throws DalException {
-		// TODO Auto-generated method stub
+		ArrayList<Retrait> listRetrait = new ArrayList<Retrait>();
+		
+		 String LISTER = "select * from RETRAITS";
+		 try(Connection cnx = ConnectionProvider.getConnection()){
+
+			 PreparedStatement pstmt;
+				ResultSet rs;
+				pstmt = cnx.prepareStatement(LISTER);
+			 
+				rs = pstmt.executeQuery();
+				while(rs.next())
+				{
+					listRetrait.add( new Retrait());
+				}
+			   
+	        } catch (SQLException e) {
+	        	e.printStackTrace();
+	        	DalException dalException = new DalException();
+	            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+	            throw dalException;
+	        }
+		
 		return null;
 	}
 
