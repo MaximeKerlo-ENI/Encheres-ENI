@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.bll.ArticleManager;
 import fr.eni.bll.UserManager;
 import fr.eni.bo.ArticleVendu;
-import fr.eni.javaee.bll.BusinessException;
+
 
 
 /**
@@ -36,7 +37,7 @@ public class ServletIndex extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			listeArticles = articleManager.selectAll();
+			listeArticles = (ArrayList<ArticleVendu>) articleManager.selectAll();
 			request.setAttribute("listeArticles", listeArticles);		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

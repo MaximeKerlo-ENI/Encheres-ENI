@@ -140,6 +140,9 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
     }
 
     public Enchere selectById(int id) throws DalException  {
+    	
+   	
+    	
         return null;
     }
 
