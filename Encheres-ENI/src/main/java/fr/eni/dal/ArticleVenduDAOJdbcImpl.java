@@ -280,58 +280,21 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 	}
 
 	private ArticleVendu hydrateArticleVendu(ResultSet rs) {
-		
-		System.out.println("HYDRATE ?");
 
+		ArticleVendu article=null;
 		try {
 			UtilisateurDAOJdbcImpl daoUser = new UtilisateurDAOJdbcImpl();
-
-			CategorieDAOJdbcImpl daoCategory = new CategorieDAOJdbcImpl();
-
 			Utilisateur user = daoUser.selectById(rs.getInt("no_utilisateur"));
-	//		System.out.println(rs.getInt("no_utilisateur") + "?");
-
-			Categorie categorie = daoCategory.selectById(rs.getInt("no_categorie"));
-
-			RetraitDAOJdbcImpl managerRetrait = new RetraitDAOJdbcImpl();
-			Retrait retrait = managerRetrait.selectById(rs.getInt("no_retrait"));
 			
+			article=new ArticleVendu(rs.getString("nom_article"),rs.getDate("date_fin_encheres").toLocalDate(),rs.getInt("prix_initial"),user);
 			
-			System.out.println("Retrait : " + retrait);
-
-//			System.out.println("User : " + user);
-
 		} catch (Exception e) {
 			System.out.println("Erreur !");
 			e.printStackTrace();
 		}
 
-		return null;
-//        	try {
-//        		
-//    			return new ArticleVendu(
-//    			        rs.getInt("no_article"),
-//    			        rs.getString("nom_article"),
-//    			        rs.getString("description"),
-//    			        rs.getDate("date_debut_enchere"),
-//    			        rs.getDate("date_fin_enchere"),
-//    			        rs.getInt("miseAPrix"),
-//    			        rs.getInt("prix_initial"),
-//    			        rs.getInt("prix_vente"),
-//    			        retrait,
-//    			        
-//    			        rs.getString("etat_vente"),
-//    			        user,
-//    			        categorie
-//    			        
-//    			);
-//    		} catch (SQLException e) {
-//    			// TODO Auto-generated catch block
-//    			e.printStackTrace();
-//                DalException dalException = new DalException();
-//                dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
-//                throw dalException;
-//    		}
+		return article;
+
 
 	}
 
