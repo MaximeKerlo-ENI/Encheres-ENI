@@ -24,7 +24,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie  {
 	            stmt.setInt(1, categorie.getNoCategorie());
 	            stmt.setString(2, categorie.getLibelle());
 	            stmt.executeUpdate();
-	            cnx.close();
+	            
 	        } catch (SQLException e) {
 	        	e.printStackTrace();
 	        	 DalException dalException = new DalException();
@@ -48,7 +48,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie  {
 	                        rs.getString("libelle")
 	                );
 	            }
-	            cnx.close();
+	            
 	        } catch (SQLException e) {
 	         	e.printStackTrace();
 	        	 DalException dalException = new DalException();
@@ -71,7 +71,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie  {
 	            if (rs.next()) {
 	                sql = false;
 	            }
-	            cnx.close();
+	           
 	        } catch (SQLException e) {
 	        	e.printStackTrace();
 	        	 DalException dalException = new DalException();
@@ -96,7 +96,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie  {
 	                        rs.getString("libelle")
 	                ));
 	            }
-	            cnx.close();
+	           
 	        } catch (SQLException e) {
 	        	e.printStackTrace();
 	       	 DalException dalException = new DalException();
@@ -119,7 +119,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie  {
 	            if (rs.next()) {
 	                isUnique = false;
 	            }
-	            cnx.close();
+	            
 	        } catch (SQLException e) {
 	         	e.printStackTrace();
 		       	 DalException dalException = new DalException();

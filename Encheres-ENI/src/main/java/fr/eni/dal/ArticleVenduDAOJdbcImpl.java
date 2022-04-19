@@ -39,7 +39,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
             if (rs.next()) {
                 articleVendu.setNoArticle(rs.getInt(1));
             }
-            cnx.close();
+            
         } catch (SQLException e) {
         	e.printStackTrace();
         	 DalException dalException = new DalException();
@@ -60,7 +60,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 	            if (rs.next()) {
 	                articleVendu = hydrateArticleVendu(rs);
 	            }
-	            cnx.close();
+	           
 	        } catch (SQLException e) {
 	        	e.printStackTrace();
 	        	 DalException dalException = new DalException();
@@ -89,7 +89,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
                 while (rs.next()) {
                     articlesVendus.add(hydrateArticleVendu(rs));
                 }
-                cnx.close();
+               
             } catch (SQLException e) {
                 e.printStackTrace();
            	 DalException dalException = new DalException();
@@ -112,7 +112,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
                 while (rs.next()) {
                     articlesVendus.add(rs.getInt("no_article"));
                 }
-                cnx.close();
+               
             } catch (SQLException e) {
                 e.printStackTrace();
               	 DalException dalException = new DalException();
@@ -138,7 +138,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
                 while (rs.next()) {
                     articleVendus.add(rs.getInt("no_article"));
                 }
-                cnx.close();
+               
             } catch (SQLException e) {
             	  e.printStackTrace();
                	 DalException dalException = new DalException();
@@ -162,7 +162,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
                 while(rs.next()) {
                     articlesVendus.add(hydrateArticleVendu(rs));
                 }
-                cnx.close();
+             
             } catch (SQLException e) {
             	  e.printStackTrace();
                 	 DalException dalException = new DalException();
@@ -182,7 +182,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
                 while (rs.next()) {
                     articlesVendus.add(hydrateArticleVendu(rs));
                 }
-                cnx.close();
+            
             } catch (SQLException e) {
             	  e.printStackTrace();
              	 DalException dalException = new DalException();
@@ -211,7 +211,7 @@ public void update(ArticleVendu articleVendu) throws DalException{
         fillPreparedStatement(articleVendu, stmt);
         stmt.setInt(10, articleVendu.getNoArticle());
         stmt.execute();
-        cnx.close();
+        
     } catch (SQLException e) {
     	  e.printStackTrace();
       	 DalException dalException = new DalException();
@@ -227,7 +227,7 @@ public void updateCurrentPrice(int noArticle, int newPrice) throws DalException 
         stmt.setInt(1, newPrice);
         stmt.setInt(2, noArticle);
         stmt.executeUpdate();
-        cnx.close();
+       
     } catch (SQLException e) {
     	  e.printStackTrace();
        	 DalException dalException = new DalException();
@@ -245,7 +245,7 @@ public void updateCurrentPrice(int noArticle, int newPrice) throws DalException 
                 PreparedStatement stmt = cnx.prepareStatement(DELETE);
                 stmt.setInt(1, articleVendu.getNoArticle());
                 stmt.executeUpdate();
-                cnx.close();
+              
             } catch (SQLException e) {
                 e.printStackTrace();
              	 DalException dalException = new DalException();
@@ -266,7 +266,7 @@ public void updateCurrentPrice(int noArticle, int newPrice) throws DalException 
             stmt.setString(7, articleVendu.getEtatVente());
             stmt.setInt(8,articleVendu.getUtilisateur().getNoUtilisateur());
             stmt.setInt(9,articleVendu.getCategorie().getNoCategorie());
-            cnx.close();
+            
             } catch (SQLException e) {
                 e.printStackTrace();
              	 DalException dalException = new DalException();
@@ -297,7 +297,7 @@ public void updateCurrentPrice(int noArticle, int newPrice) throws DalException 
                 while(rs.next()) {
                     articlesVendus.add(hydrateArticleVendu(rs));
                 }
-                cnx.close();
+               
             } 
                 catch (SQLException e) {
             	   e.printStackTrace();
