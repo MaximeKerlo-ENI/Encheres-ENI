@@ -14,6 +14,12 @@ import fr.eni.bo.Categorie;
 
 
 public class CategorieDAOJdbcImpl implements DAOCategorie  {
+	/*void insert(Categorie categorie) : requete qui permet d'inserer une categorie d'articles
+	 * 
+	 * 
+	 * 
+	 */
+	
 	
 	
 	  public void insert(Categorie categorie) throws DalException {
