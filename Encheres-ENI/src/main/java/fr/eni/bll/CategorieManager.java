@@ -2,7 +2,6 @@ package fr.eni.bll;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import fr.eni.bo.Categorie;
 import fr.eni.dal.DAOCategorie;
 import fr.eni.dal.DAOFactory;
@@ -10,7 +9,7 @@ import fr.eni.dal.DalException;
 
 public class CategorieManager {
 
-	private DAOCategorie daoCategorie = (DAOCategorie) DAOFactory.getDAOCategorie();
+	private DAOCategorie daoCategorie = DAOFactory.getDAOCategorie();
 
 	public void insert(Categorie categorie) throws DalException {
 		try {
@@ -45,4 +44,14 @@ public class CategorieManager {
 		}
 		return listeCategorie;
 	}
+	
+
+//	boolean selectLibelle(String libelleToCheck) throws  DalException;
+
+//	boolean checkForUniqueCategorieLibelle(String libelleToCheck) throws  DalException;
+
+//	Categorie selectById(int id) throws DalException;
+	
+	
+	
 }

@@ -16,10 +16,11 @@ public class ArticleVendu {
 	private ArrayList<Enchere> listeEnchere;
 	private Utilisateur utilisateur;
 	private Categorie categorie;
+	private Retrait retrait;
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait,
-			Utilisateur utilisateur, Categorie categorie) {
+			Utilisateur utilisateur, Categorie categorie, Retrait retrait) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -31,11 +32,12 @@ public class ArticleVendu {
 		this.lieuRetrait = lieuRetrait;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
+		this.setRetrait(retrait);
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
 			int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait, Utilisateur utilisateur,
-			Categorie categorie) {
+			Categorie categorie, Retrait retrait) {
 
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -47,6 +49,14 @@ public class ArticleVendu {
 		this.lieuRetrait = lieuRetrait;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
+		this.setRetrait(retrait);
+	}
+
+	public ArticleVendu(String nomArticle, LocalDate dateFinEncheres, int miseAPrix, Utilisateur utilisateur) {
+		this.nomArticle = nomArticle;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.utilisateur = utilisateur;
 	}
 
 	public ArticleVendu() {
@@ -148,6 +158,14 @@ public class ArticleVendu {
 		this.categorie = categorie;
 	}
 
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
+	}
+
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
@@ -155,5 +173,6 @@ public class ArticleVendu {
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", lieuRetrait=" + lieuRetrait
 				+ ", listeEnchere=" + listeEnchere + ", utilisateur=" + utilisateur + ", categorie=" + categorie + "]";
 	}
+
 
 }
