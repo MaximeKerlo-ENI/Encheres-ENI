@@ -11,13 +11,13 @@ public class EncheresManager {
 
 	private DAOEnchere daoEnchere = DAOFactory.getDAOEnchere();
 
-	public void insert(Enchere enchere) throws DalException {
-		try {
-			this.daoEnchere.insert(enchere);
-		} catch (DalException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void insert(Enchere enchere) throws DalException {
+//		try {
+//			this.daoEnchere.insert(enchere);
+//		} catch (DalException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public void update(Enchere enchere) throws DalException {
 

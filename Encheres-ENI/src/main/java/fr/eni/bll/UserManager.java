@@ -11,13 +11,13 @@ public class UserManager {
 
 	private DAOUtilisateur daoUtilisateur = DAOFactory.getDAOUtilisateur();
 	
-	public void insert(Utilisateur utilisateur) throws DalException {
-		try {
-			this.daoUtilisateur.insert(utilisateur);
-		} catch (DalException e) {
-			e.printStackTrace();
-		} 
-	}
+//	public void insert(Utilisateur utilisateur) throws DalException {
+//		try {
+//			this.daoUtilisateur.insert(utilisateur);
+//		} catch (DalException e) {
+//			e.printStackTrace();
+//		} 
+//	}
 	
 	public void update(Utilisateur utilisateur) throws DalException {
 		try {
