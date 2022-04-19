@@ -15,21 +15,23 @@ public class RetraitManager {
 		try {
 			this.daoRetrait.insert(retrait);
 		} catch (DalException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-//	public void update(Retrait retrait) throws DalException {
-//	
-//		this.daoRetrait.insert(retrait);
-//	}
+	public void update(Retrait retrait) throws DalException {
+	
+		try {
+			this.daoRetrait.insert(retrait);
+		} catch (DalException e) {
+			e.printStackTrace();
+		}
+	}
 
 	void delete(Retrait retrait) throws DalException {
 		try {
 			this.daoRetrait.delete(retrait);
 		} catch (DalException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -39,10 +41,8 @@ public class RetraitManager {
 		try {
 			listeRetrait = this.daoRetrait.selectAll();
 		} catch (DalException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return listeRetrait;
 	}
-
 }

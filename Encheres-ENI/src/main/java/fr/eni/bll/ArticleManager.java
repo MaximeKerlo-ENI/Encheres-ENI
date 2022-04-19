@@ -1,18 +1,11 @@
 package fr.eni.bll;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import fr.eni.bo.ArticleVendu;
-import fr.eni.bo.Categorie;
 import fr.eni.dal.DAOArticleVendu;
 import fr.eni.dal.DAOFactory;
 import fr.eni.dal.DalException;
-
-/**
- * Classe charger de gérer les articles
- */
 
 public class ArticleManager {
 
@@ -51,5 +44,6 @@ public class ArticleManager {
 		}
 		return listeArticle;
 	}
-
 }
+
+
