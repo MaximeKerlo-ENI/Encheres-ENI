@@ -11,13 +11,13 @@ public class ArticleManager {
 
 	private DAOArticleVendu daoArticle = DAOFactory.getDAOArticleVendu();
 
-//	public void insert(ArticleVendu article) throws DalException {
-//		try {
-//			this.daoArticle.insert(article);
-//		} catch (DalException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void insert(ArticleVendu article) throws DalException {
+		try {
+			this.daoArticle.insert(article);
+		} catch (DalException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void update(ArticleVendu article) throws DalException {
 		try {

@@ -11,13 +11,13 @@ public class RetraitManager {
 
 	private DAORetrait daoRetrait = (DAORetrait) DAOFactory.getDAORetrait();
 
-//	public void insert(Retrait retrait) throws DalException {
-//		try {
-//			this.daoRetrait.insert(retrait);
-//		} catch (DalException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void insert(Retrait retrait) throws DalException {
+		try {
+			this.daoRetrait.insert(retrait);
+		} catch (DalException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void update(Retrait retrait) throws DalException {
 	
