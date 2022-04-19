@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-import fr.eni.bll.BusinessException;
+
 import fr.eni.bo.Utilisateur;
 
 public interface DAOUtilisateur extends DAO<Utilisateur> {

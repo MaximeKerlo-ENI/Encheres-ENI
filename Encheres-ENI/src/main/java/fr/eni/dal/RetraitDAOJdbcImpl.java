@@ -2,11 +2,11 @@ package fr.eni.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
-import fr.eni.bll.BusinessException;
+
 import fr.eni.bo.Retrait;
 
 public class RetraitDAOJdbcImpl implements DAO<Retrait>{

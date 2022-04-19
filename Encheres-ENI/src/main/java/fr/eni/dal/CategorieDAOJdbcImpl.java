@@ -1,7 +1,7 @@
 package fr.eni.dal;
 
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import java.util.List;
 
 
 import fr.eni.bo.Categorie;
-import fr.eni.bo.Enchere;
+
 
 
 public class CategorieDAOJdbcImpl implements DAOCategorie  {
