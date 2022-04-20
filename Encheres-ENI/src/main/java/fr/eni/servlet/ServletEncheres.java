@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.bll.ArticleManager;
+import fr.eni.bll.CategorieManager;
 import fr.eni.bo.ArticleVendu;
+import fr.eni.bo.Categorie;
 import fr.eni.dal.DalException;
 
 /**
@@ -21,7 +23,9 @@ import fr.eni.dal.DalException;
 public class ServletEncheres extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ArticleManager articleManager = new ArticleManager();
+	private CategorieManager categorieManager = new CategorieManager();
 	private List<ArticleVendu> listeArticle = new ArrayList<ArticleVendu>();
+	private List<Categorie> listeCategorie = new ArrayList<Categorie>();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,7 +40,9 @@ public class ServletEncheres extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			listeArticle = this.articleManager.selectAll();
+			listeCategorie = this.categorieManager.selectAll();
 			request.setAttribute("listeArticle", listeArticle);
+			request.setAttribute("listeCategorie", listeCategorie);
 		} catch (DalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

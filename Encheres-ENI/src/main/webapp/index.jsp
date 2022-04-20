@@ -30,9 +30,9 @@
 		</div><br>
 		<label>Catégorie : </label>
 		<select class="form-select" aria-label="Default select example">
-			<!-- foreach -->
-			<option>${libelle}</option>
-			<!-- fin foreach -->
+			<c:forEach var="categorie" items="${listeCategorie}">
+				<option>${libelle}</option>
+			</c:forEach>
 		</select>				
 	</div>
 	<div class="container col-5">
