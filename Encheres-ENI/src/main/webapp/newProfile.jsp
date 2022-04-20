@@ -140,7 +140,7 @@
 				<form action="./ServletProfile" method="post">
 					<div class="row">
 						<div class="container text-center">
-							<button class="btn btn-lg btn-danger" type="submit" value="delete">Supprimer compte</button>
+							<button class="btn btn-lg btn-danger" type="submit" value="delete" name="delete">Supprimer compte</button>
 						</div>
 					</div>
 				</form>
