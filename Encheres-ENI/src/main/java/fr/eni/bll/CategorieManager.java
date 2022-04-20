@@ -28,7 +28,7 @@ public class CategorieManager {
 		}
 	}
 
-	void delete(Categorie categorie) throws DalException {
+	public void delete(Categorie categorie) throws DalException {
 		try {
 			this.daoCategorie.delete(categorie);
 		} catch (DalException e) {

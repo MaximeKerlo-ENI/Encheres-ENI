@@ -28,7 +28,7 @@ public class EncheresManager {
 		}
 	}
 
-	void delete(Enchere enchere) throws DalException {
+	public void delete(Enchere enchere) throws DalException {
 		try {
 			this.daoEnchere.delete(enchere);
 		} catch (DalException e) {
