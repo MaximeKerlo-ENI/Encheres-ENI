@@ -183,7 +183,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 	}
 
 	public List<ArticleVendu> selectAll() throws DalException {
-		System.out.println("SELECT ALL ?");
+		
 		List<ArticleVendu> articlesVendus = new ArrayList<>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 
@@ -192,7 +192,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			stmt.execute();
 			ResultSet rs = stmt.getResultSet();
 			while (rs.next()) {
-				System.out.println("WHILE ?");
+				
 				articlesVendus.add(hydrateArticleVendu(rs));
 			}
 
