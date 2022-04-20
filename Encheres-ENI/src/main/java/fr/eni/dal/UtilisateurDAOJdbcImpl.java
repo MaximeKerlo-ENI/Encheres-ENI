@@ -69,8 +69,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             stmt.setString(2, password);
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
+            utilisateur = new Utilisateur(rs.getString("pseudo"),rs.getString("password")); 
             
-            
+            		
         	} catch (SQLException e) {
         		 e.printStackTrace();
                  DalException dalException = new DalException();
