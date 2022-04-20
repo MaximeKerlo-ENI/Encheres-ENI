@@ -65,10 +65,11 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             	
             PreparedStatement stmt = cnx.prepareStatement(SELECTPseudoPwd);
             stmt.setString(1, pseudo);
-          //  stmt.setString(2, password);
+            
+          stmt.setString(2, password);
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
-            //utilisateur = new Utilisateur(rs.getString("pseudo"),rs.getString("password")); 
+           
             if (rs.next()) {
                 utilisateur = hydrateUtilisateur(rs);
             }
