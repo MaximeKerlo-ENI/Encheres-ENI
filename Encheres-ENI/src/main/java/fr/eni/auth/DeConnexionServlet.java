@@ -14,6 +14,11 @@ import javax.servlet.http.HttpSession;
 public class DeConnexionServlet extends HttpServlet {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * doPost() :  enlève l'utilisateur de la session
 	 */
 	@Override
@@ -21,6 +26,6 @@ public class DeConnexionServlet extends HttpServlet {
 		// l'objet HttpSession est le même dans TOUS les servlets de l'application, mais différent pour chaque utilisateur
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("./index.jsp"); // je redirige sur la page d'accueil donc pas besoin de faire de JSP pour cette fonctionnalité
+		response.sendRedirect("/"); // je redirige sur la page d'accueil donc pas besoin de faire de JSP pour cette fonctionnalité
 	}
 }

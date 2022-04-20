@@ -1,8 +1,20 @@
 <nav>
 	<ul>
-		<li><a href="${pageContext.request.contextPath}/index.jsp">Encheres</a></li>
-		<li><a href="${pageContext.request.contextPath}/newVente.jsp">Vendre un article</a></li>
-		<li><a href="${pageContext.request.contextPath}/viewProfil.jsp">Mon profil</a></li>
+		<!-- Lien accueil -->
+		<li><a href="${pageContext.request.contextPath}/">Encheres</a></li>
+		<!-- Lien nouvelle vente -->
+		<li>
+			<form class="inline-form" action="${pageContext.request.contextPath}/ServletVente" method="GET">
+				<button type="submit" class="btn btn-link">Vendre un article</button>
+			</form>
+		</li>
+		<!-- Lien profil -->
+		<li>
+			<form class="inline-form" action="${pageContext.request.contextPath}/ServletProfil" method="GET">
+				<button type="submit" class="btn btn-link">Mon profil</button>
+			</form>
+		</li>
+		<!-- Lien déconnexion -->
 		<li>
 			<form class="inline-form" action="${pageContext.request.contextPath}/deconnexion" method="POST">
 				<button type="submit" class="btn btn-link">Deconnexion</button>

@@ -30,8 +30,9 @@
 		</div><br>
 		<label>Catégorie : </label>
 		<select class="form-select" aria-label="Default select example">
+			<option selected>Toutes</option>
 			<c:forEach var="categorie" items="${listeCategorie}">
-				<option>${libelle}</option>
+				<option>${categorie.libelle}</option>
 			</c:forEach>
 		</select>				
 	</div>

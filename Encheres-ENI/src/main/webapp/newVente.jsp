@@ -31,8 +31,11 @@
 			<textarea name="description" rows="3" cols="18"></textarea><br><br>
 			<!-- categorie article -->
 			<label>Catégorie</label>
-			<select class="w-75" name="categorie">
-				<option>${libelle}</option>
+			<select class="form-select" aria-label="Default select example">
+				<option selected>Toutes</option>
+				<c:forEach var="categorie" items="${listeCategorie}">
+					<option>${categorie.libelle}</option>
+				</c:forEach>
 			</select><br><br>
 			<!-- upload photo article -->
 			<label>Photo de l'article</label>
