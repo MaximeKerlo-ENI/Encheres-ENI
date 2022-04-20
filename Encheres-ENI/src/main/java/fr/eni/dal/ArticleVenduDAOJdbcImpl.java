@@ -26,7 +26,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 	 * List<Integer> getArticlesFromASellerAndState(Utilisateur utilisateur, String
 	 * state): requete pour selectionner par vendeur et etat de vente
 	 * List<ArticleVendu> filterByString(String filter) : requete pour selectionner
-	 * par le nom des articles vendus List<ArticleVendu> selectAll() : requete qui
+	 *  List<ArticleVendu> selectAll() : requete quiselectionne par le nom des articles vendus
 	 * permet de selectionner tous les articles vendus update(ArticleVendu
 	 * articleVendu): requete qui permet de mettre a jour les articles vendus
 	 * updateCurrentPrice(int noArticle, int newPrice): requete qui permet de mettre

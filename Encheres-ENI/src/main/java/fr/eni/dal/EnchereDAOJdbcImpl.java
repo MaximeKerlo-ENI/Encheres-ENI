@@ -14,11 +14,21 @@ import java.util.List;
 
 
 import fr.eni.bo.ArticleVendu;
+import fr.eni.bo.Categorie;
 import fr.eni.bo.Enchere;
 import fr.eni.bo.Utilisateur;
 
 
 public class EnchereDAOJdbcImpl implements DAOEnchere {
+	/*insert(Enchere enchere) : requete qui permet d'inserer des encheres
+	 * List<Integer> getNoArticlesByUtilisateurAndEtat(Utilisateur utilisateur, String etat_vente): liste des articles par utilisateur et par etat de vente
+	 * List<Integer> getNoArticlesWonByUtilisateur(Utilisateur utilisateur): liste des articles gagnes par utilisateurs
+	 * HashMap<Integer, Integer> getAmountAndPseudoOfBestOffer(ArticleVendu articleVendu): hashmap en java permet de retrouver rapidement un element existant
+	 * 
+	 */
+	
+	
+	
 	
 	
     public void insert(Enchere enchere) throws DalException {
@@ -141,25 +151,104 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 
     public Enchere selectById(int id) throws DalException  {
     	
-   	
-    	
         return null;
     }
 
-    public List<Enchere> selectAll() throws DalException  {
-        return null;
-    }
-
-    public void update(Enchere enchere) throws DalException  {
-    	
-    	
-
-    }
-
-    public void delete(Enchere enchere) throws DalException  {
-
-    }
-
+   
+	public List<Enchere> selectAll() throws DalException {
+		List<Enchere> result = new ArrayList<Enchere>();
 	
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			ArrayList<Enchere> listEnchere = new ArrayList<Enchere>();
+			String LISTER = "select * from ENCHERES";
+		
+			 PreparedStatement stmt = cnx.prepareStatement(LISTER);
+			
+					 stmt.execute();
+	            ResultSet rs = stmt.getResultSet();
+					
+					}
+					
+		 catch (SQLException e) {
+			DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+            throw dalException;
+		}
+		return result;
+	}
 
-}
+
+	@Override
+	public void update(Enchere enchere) throws DalException {
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			String UPDATE = "UPDATE ENCHERES SET no_utilisateur =?,no_article=?,date_enchere=?, montant_enchere=? WHERE no_article=?";
+			PreparedStatement stmt = cnx.prepareStatement(UPDATE);
+			stmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+			stmt.setInt(2, enchere.getArticle().getNoArticle());
+			stmt.setDate(3,Date.valueOf(enchere.getDateEnchere()));
+			stmt.setInt(4, enchere.getMontant_enchere());
+			stmt.setInt(5, enchere.getArticle().getNoArticle());
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_UPDATE);
+            throw dalException;
+		}
+
+	}
+
+
+	@Override
+	public void delete(Enchere enchere) throws DalException {
+		try (Connection con = ConnectionProvider.getConnection()) {
+			String DELETE = "DELETE FROM ENCHERES WHERE no_utilisateur =? and no_article =?";
+		
+			PreparedStatement stmt = con.prepareStatement(DELETE);
+			stmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+			stmt.setInt(2, enchere.getArticle().getNoArticle());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			DalException dalException = new DalException();
+            dalException.addError(ErrorCodesDAL.ERROR_SQL_DELETE);
+            throw dalException;
+		}
+	}
+	
+		List<Enchere> selectByUser(Utilisateur utilisateur) throws DalException{
+			
+			ArrayList<Enchere> listEnchere = new ArrayList<Enchere>();
+			
+			try(Connection cnx = ConnectionProvider.getConnection()) {
+				String SELECTBYUSER = "select * from ENCHERES where no_utilisateur=?";
+				PreparedStatement stmt = cnx.prepareStatement(SELECTBYUSER);
+				stmt.setInt(1, utilisateur.getNoUtilisateur());
+				
+				stmt.execute();
+				ResultSet rs = stmt.getResultSet();
+				while (rs.next()) {
+					//ArticleVendu art = new ArticleVendu();
+					 listEnchere.add(rs.getInt("no_article"), null) ;
+			
+
+				}		
+			}        
+				
+				
+			catch(Exception e){
+				DalException dalException = new DalException();
+	            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
+	            throw dalException;
+			}
+			return listEnchere;
+		}
+		
+		
+		
+		
+		
+	
+	}
+
+

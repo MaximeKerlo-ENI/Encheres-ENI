@@ -15,9 +15,10 @@ import fr.eni.bo.Categorie;
 
 public class CategorieDAOJdbcImpl implements DAOCategorie  {
 	/*void insert(Categorie categorie) : requete qui permet d'inserer une categorie d'articles
-	 * 
-	 * 
-	 * 
+	 * Categorie selectById(int id) : requete qui selectionne par l'id de categorie
+	 * boolean selectLibelle(String libelleToCheck) : requete qui selectionne par le libelle
+	 * List<Categorie> selectAll() : liste de toutes les categories
+	 * boolean checkForUniqueCategorieLibelle(String libelleToCheck): verifie si le libelle de categorie est unique
 	 */
 	
 	
@@ -139,21 +140,39 @@ public class CategorieDAOJdbcImpl implements DAOCategorie  {
 
 	@Override
 	public void update(Categorie var) throws DalException {
-		// TODO Auto-generated method stub
+		
+		//String UPDATE = "update CATEGORIES set libelle=? where no_categorie = ?";
 		
 	}
+		
+		
+	
 
 	  @Override
 	    public void delete(Categorie categorie) throws DalException {
-
-	    }
-
+		  try(Connection cnx = ConnectionProvider.getConnection()){
+			  String DELETE = "delete from CATEGORIES where no_categorie = ?";
+			  PreparedStatement stmt = cnx.prepareStatement(DELETE );
+	            stmt.execute();
+	            ResultSet rs = stmt.getResultSet();
+	            if(categorie.getNoCategorie()!=0){
+					stmt = cnx.prepareStatement(DELETE, PreparedStatement.RETURN_GENERATED_KEYS);
+					stmt.setInt(1, categorie.getNoCategorie());
+					stmt.executeUpdate();
+					rs = stmt.getGeneratedKeys();
+		      }
+		  } catch (SQLException e) {
+	         	e.printStackTrace();
+		       	 DalException dalException = new DalException();
+	             dalException.addError(ErrorCodesDAL.ERROR_SQL_DELETE);
+	             throw dalException;
+	        }
 	
+	  }
+	  
+}  
+	  
+	  
+	  
+	  
 
-	  
-	  
-	  
-	  
-	  
-	  
-}

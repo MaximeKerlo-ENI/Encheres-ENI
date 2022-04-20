@@ -1,17 +1,11 @@
 package fr.eni.bll;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import fr.eni.bo.ArticleVendu;
 import fr.eni.dal.DAOArticleVendu;
 import fr.eni.dal.DAOFactory;
 import fr.eni.dal.DalException;
-
-/**
- * Classe charger de gérer les articles
- */
 
 public class ArticleManager {
 
@@ -21,20 +15,35 @@ public class ArticleManager {
 		try {
 			this.daoArticle.insert(article);
 		} catch (DalException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public List<ArticleVendu> selectAll() throws DalException {
-		List<ArticleVendu> listeArticle= new ArrayList<ArticleVendu>();
+
+	public void update(ArticleVendu article) throws DalException {
 		try {
-			listeArticle=this.daoArticle.selectAll();
+			this.daoArticle.update(article);
 		} catch (DalException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	void delete(ArticleVendu article) throws DalException {
+		try {
+			this.daoArticle.delete(article);
+		} catch (DalException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<ArticleVendu> selectAll() throws DalException {
+		List<ArticleVendu> listeArticle = new ArrayList<ArticleVendu>();
+		try {
+			listeArticle = this.daoArticle.selectAll();
+		} catch (DalException e) {
 			e.printStackTrace();
 		}
 		return listeArticle;
 	}
-
 }
+
+
