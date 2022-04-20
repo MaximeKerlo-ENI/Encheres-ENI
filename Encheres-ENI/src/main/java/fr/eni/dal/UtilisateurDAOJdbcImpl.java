@@ -296,7 +296,8 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
                     "						mot_de_passe=?,"+
                     "						WHERE no_utilisateur = ?";
             PreparedStatement stmt = cnx.prepareStatement(UPDATE);
-            fillPreparedStatement(utilisateur, stmt);
+              fillPreparedStatement(utilisateur, stmt);
+            stmt.setInt(10, utilisateur.getNoUtilisateur());
             stmt.executeUpdate();
            
         } catch (SQLException e) {
