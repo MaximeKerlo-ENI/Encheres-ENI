@@ -19,6 +19,8 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
     * delete(Utilisateur utilisateur) : requete qui permet de supprimer un utilisateur
     * checkForUniquePseudoAndMail(String pseudo, String mail): requete qui permet de verifier si le pseudo et le mail est unique
     */
+	
+	
     public void insert(Utilisateur utilisateur) throws DalException{
         
         try (Connection cnx = ConnectionProvider.getConnection()){
@@ -320,7 +322,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		        stmt.setString(6, utilisateur.getRue());
 		        stmt.setString(7, utilisateur.getCodePostal());
 		        stmt.setString(8, utilisateur.getVille());
-		        stmt.setString(8, utilisateur.getMotDePasse());
+		        stmt.setString(9, utilisateur.getMotDePasse());
 		      
 		    }
 
