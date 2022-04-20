@@ -293,9 +293,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
                     "                        rue = ?, " +
                     "                        code_postal = ?, " +
                     "                        ville = ?, " +
-                    "                        mot_de_passe = ?, " +
-                    "                        credit = ?, " +
-                    "                        administrateur = ? ";
+                    "                        mot_de_passe = ?, ";
             PreparedStatement stmt = cnx.prepareStatement(UPDATE);
             fillPreparedStatement(utilisateur, stmt);
             stmt.executeUpdate();
@@ -321,8 +319,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		        stmt.setString(7, utilisateur.getCodePostal());
 		        stmt.setString(8, utilisateur.getVille());
 		        stmt.setString(9, utilisateur.getMotDePasse());
-		        stmt.setInt(10, utilisateur.getCredit());
-		        
+		      
 		    }
 
 
