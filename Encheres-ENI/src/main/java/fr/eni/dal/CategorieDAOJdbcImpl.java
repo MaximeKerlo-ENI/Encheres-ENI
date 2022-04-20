@@ -95,8 +95,9 @@ public class CategorieDAOJdbcImpl implements DAOCategorie  {
 	        	String SELECT_ALL = "SELECT * FROM CATEGORIES";
 	        	PreparedStatement stmt = cnx.prepareStatement(SELECT_ALL);
 	            
-	            stmt.execute(SELECT_ALL);
+	            stmt.execute();
 	            ResultSet rs = stmt.getResultSet();
+	            
 	            while (rs.next()) {
 	                categories.add(new Categorie(
 	                        rs.getInt("no_categorie"),
