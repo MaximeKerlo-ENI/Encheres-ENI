@@ -27,7 +27,7 @@ public class ArticleManager {
 		}
 	}
 
-	void delete(ArticleVendu article) throws DalException {
+	public void delete(ArticleVendu article) throws DalException {
 		try {
 			this.daoArticle.delete(article);
 		} catch (DalException e) {

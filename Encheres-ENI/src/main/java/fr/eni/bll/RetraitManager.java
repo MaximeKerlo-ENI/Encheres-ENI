@@ -28,7 +28,7 @@ public class RetraitManager {
 		}
 	}
 
-	void delete(Retrait retrait) throws DalException {
+	public void delete(Retrait retrait) throws DalException {
 		try {
 			this.daoRetrait.delete(retrait);
 		} catch (DalException e) {
