@@ -176,7 +176,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
             String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?;" ;
             PreparedStatement stmt = cnx.prepareStatement(DELETE);
             stmt.setInt(1, utilisateur.getNoUtilisateur());
-            stmt.setString(2, utilisateur.getPseudo());
+           
             stmt.executeUpdate();
           
         } catch (SQLException e) {
