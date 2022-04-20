@@ -20,7 +20,7 @@
 				<!-- version nouveau profil -->
 				<h1 class="text-center">Nouveau profil</h1>
 
-				<form action="/ServletNewProfile" method="post">
+				<form action="./ServletNewProfile" method="post">
 					<div class="row">
 						<div class="container text-center">
 							<label class="mt-3">Pseudo : </label> <input type="text"
@@ -72,7 +72,7 @@
 				<!-- version modif profil -->
 				<h1 class="text-center">Modifier profil</h1>
 
-				<form action="/ServletProfile" method="post">
+				<form action="./ServletProfile" method="post">
 					<div class="row">
 						<div class="container text-center">
 							<label class="mt-3">Pseudo : </label> <input type="text"
@@ -111,8 +111,8 @@
 					<br>
 					<div class="row">
 						<div class="container text-center">
-							<label>Mot de passe actuel : </label> <input type="text"
-								name="mdp-mod" value="${utilisateurConnecte.codePostal}">
+							<label>Mot de passe actuel : </label> <input readonly type="password"
+								name="mdp-mod" value="${utilisateurConnecte.motDePasse}">
 						</div>
 					</div>
 					<br>
@@ -134,6 +134,13 @@
 						<div class="container text-center">
 							<button class="btn btn-lg btn-primary" type="submit">Enregistrer</button>
 							<a href="./" class="btn btn-lg btn-primary">Annuler</a>
+						</div>
+					</div>
+				</form>
+				<form action="./ServletProfile" method="post">
+					<div class="row">
+						<div class="container text-center">
+							<button class="btn btn-lg btn-danger" type="submit" value="delete">Supprimer compte</button>
 						</div>
 					</div>
 				</form>

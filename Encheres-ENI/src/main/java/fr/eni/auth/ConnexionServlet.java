@@ -60,7 +60,7 @@ public class ConnexionServlet extends HttpServlet {
 			// l'objet HttpSession est le même dans TOUS les servlets de l'application, mais différent pour chaque utilisateur
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateurConnecte", utilisateur);
-			System.out.println(utilisateur.getPseudo());
+			Utilisateur user = (Utilisateur) session.getAttribute("utilisateurConnecte");
 			request.getRequestDispatcher("/").forward(request, response);
 		}
 	}
