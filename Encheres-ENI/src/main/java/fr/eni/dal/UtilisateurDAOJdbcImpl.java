@@ -60,18 +60,20 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
     	
         Utilisateur utilisateur = null;
         try (Connection cnx = ConnectionProvider.getConnection()){
-            String SELECTPseudoPwd = "SELECT pseudo, mot_de_passe FROM UTILISATEURS "
-            		+ "WHERE pseudo = ? AND mot_de_passe=?";
+            String SELECTPseudoPwd = "SELECT * FROM UTILISATEURS WHERE pseudo=? AND mot_de_passe=?";
             		
             	
             PreparedStatement stmt = cnx.prepareStatement(SELECTPseudoPwd);
             stmt.setString(1, pseudo);
-            stmt.setString(2, password);
+            
+          stmt.setString(2, password);
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
-            utilisateur = new Utilisateur(rs.getString("pseudo"),rs.getString("password")); 
+           
+            if (rs.next()) {
+                utilisateur = hydrateUtilisateur(rs);
+            }
             
-            		
         	} catch (SQLException e) {
         		 e.printStackTrace();
                  DalException dalException = new DalException();
@@ -291,16 +293,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
                     "                        rue = ?, " +
                     "                        code_postal = ?, " +
                     "                        ville = ?, " +
-                    "                        mot_de_passe = ?, " +
-                    "                        credit = ?, " +
-                    "                        administrateur = ? " +
-                    "WHERE no_utilisateur = ?;" +
-                    "UPDATE UTILISATEURS_ROLES SET pseudo = ? WHERE no_utilisateur = ?;";
+                    "                        mot_de_passe = ?, ";
             PreparedStatement stmt = cnx.prepareStatement(UPDATE);
             fillPreparedStatement(utilisateur, stmt);
-            stmt.setInt(12, utilisateur.getNoUtilisateur());
-            stmt.setString(13, utilisateur.getPseudo());
-            stmt.setInt(14, utilisateur.getNoUtilisateur());
             stmt.executeUpdate();
            
         } catch (SQLException e) {
@@ -324,8 +319,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		        stmt.setString(7, utilisateur.getCodePostal());
 		        stmt.setString(8, utilisateur.getVille());
 		        stmt.setString(9, utilisateur.getMotDePasse());
-		        stmt.setInt(10, utilisateur.getCredit());
-		        stmt.setBoolean(11, utilisateur.getAdministrateur());
+		      
 		    }
 
 
