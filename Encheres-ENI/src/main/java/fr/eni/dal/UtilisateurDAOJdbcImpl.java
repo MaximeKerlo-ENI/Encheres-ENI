@@ -295,14 +295,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
                     "                        ville = ?, " +
                     "                        mot_de_passe = ?, " +
                     "                        credit = ?, " +
-                    "                        administrateur = ? " +
-                    "WHERE no_utilisateur = ?;" +
-                    "UPDATE UTILISATEURS_ROLES SET pseudo = ? WHERE no_utilisateur = ?;";
+                    "                        administrateur = ? ";
             PreparedStatement stmt = cnx.prepareStatement(UPDATE);
             fillPreparedStatement(utilisateur, stmt);
-            stmt.setInt(12, utilisateur.getNoUtilisateur());
-            stmt.setString(13, utilisateur.getPseudo());
-            stmt.setInt(14, utilisateur.getNoUtilisateur());
             stmt.executeUpdate();
            
         } catch (SQLException e) {
@@ -327,7 +322,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		        stmt.setString(8, utilisateur.getVille());
 		        stmt.setString(9, utilisateur.getMotDePasse());
 		        stmt.setInt(10, utilisateur.getCredit());
-		        stmt.setBoolean(11, utilisateur.getAdministrateur());
+		        
 		    }
 
 
