@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.bo.ArticleVendu;
+
 import fr.eni.bo.Retrait;
 
 public class RetraitDAOJdbcImpl implements DAO<Retrait>{

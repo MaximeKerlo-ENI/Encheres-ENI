@@ -2,7 +2,7 @@ package fr.eni.dal;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import fr.eni.bo.ArticleVendu;
 import fr.eni.bo.Categorie;
-import fr.eni.bo.Retrait;
+
 import fr.eni.bo.Utilisateur;
 
 public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {

@@ -19,6 +19,9 @@ public class CategorieDAOJdbcImpl implements DAOCategorie  {
 	 * boolean selectLibelle(String libelleToCheck) : requete qui selectionne par le libelle
 	 * List<Categorie> selectAll() : liste de toutes les categories
 	 * boolean checkForUniqueCategorieLibelle(String libelleToCheck): verifie si le libelle de categorie est unique
+	 * List<Categorie> selectAll() : requete qui permet de selectionner toutes les categories
+	 *void update(Categorie categorie ): requete qui permet de mettre a jour
+	 * 
 	 */
 	
 	
@@ -140,12 +143,19 @@ public class CategorieDAOJdbcImpl implements DAOCategorie  {
 	
 
 	@Override
-	public void update(Categorie var) throws DalException {
-		
-		//String UPDATE = "update CATEGORIES set libelle=? where no_categorie = ?";
-		
-	}
-		
+	public void update(Categorie categorie ) throws DalException {
+		try(Connection cnx = ConnectionProvider.getConnection()){
+			String UPDATE_CATEGORIE = "update CATEGORIES set libelle=? where no_categorie = ?";
+			 PreparedStatement stmt = cnx.prepareStatement(UPDATE_CATEGORIE);
+	            stmt.setString(1, categorie.getLibelle());
+	           
+	}catch (SQLException e) {
+     	e.printStackTrace();
+       	 DalException dalException = new DalException();
+         dalException.addError(ErrorCodesDAL.ERROR_SQL_UPDATE);
+         throw dalException;
+    }
+	}	
 		
 	
 
