@@ -60,18 +60,19 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
     	
         Utilisateur utilisateur = null;
         try (Connection cnx = ConnectionProvider.getConnection()){
-            String SELECTPseudoPwd = "SELECT pseudo, mot_de_passe FROM UTILISATEURS "
-            		+ "WHERE pseudo = ? AND mot_de_passe=?";
+            String SELECTPseudoPwd = "SELECT * FROM UTILISATEURS WHERE pseudo=? AND mot_de_passe=?";
             		
             	
             PreparedStatement stmt = cnx.prepareStatement(SELECTPseudoPwd);
             stmt.setString(1, pseudo);
-            stmt.setString(2, password);
+          //  stmt.setString(2, password);
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
-            utilisateur = new Utilisateur(rs.getString("pseudo"),rs.getString("password")); 
+            //utilisateur = new Utilisateur(rs.getString("pseudo"),rs.getString("password")); 
+            if (rs.next()) {
+                utilisateur = hydrateUtilisateur(rs);
+            }
             
-            		
         	} catch (SQLException e) {
         		 e.printStackTrace();
                  DalException dalException = new DalException();
