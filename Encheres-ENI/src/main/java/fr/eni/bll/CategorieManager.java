@@ -7,7 +7,6 @@ import fr.eni.dal.DAOCategorie;
 import fr.eni.dal.DAOFactory;
 import fr.eni.dal.DalException;
 
-
 public class CategorieManager {
 
 	private DAOCategorie daoCategorie = DAOFactory.getDAOCategorie();
@@ -45,12 +44,14 @@ public class CategorieManager {
 		}
 		return listeCategorie;
 	}
-	
-	public void selectById(int id) throws DalException {
+
+	public Categorie selectById(int id) throws DalException {
+		Categorie categorie = null;
 		try {
-			this.daoCategorie.selectById(id);
+			categorie = this.daoCategorie.selectById(id);
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
+		return categorie;
 	}
 }
