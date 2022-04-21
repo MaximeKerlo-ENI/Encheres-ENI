@@ -9,12 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
 
 import fr.eni.bo.ArticleVendu;
-import fr.eni.bo.Categorie;
+
 import fr.eni.bo.Enchere;
 import fr.eni.bo.Utilisateur;
 
@@ -82,7 +83,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 
 
 
-    @Override
+
     public List<Integer> getNoArticlesWonByUtilisateur(Utilisateur utilisateur) throws DalException{
     	
         List<Integer> articlesWonByUtilisateur = new ArrayList<>();
@@ -216,27 +217,24 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 		}
 	}
 	
-		List<Enchere> selectByUser(Utilisateur utilisateur) throws DalException{
+		public List<Enchere> selectByUser(Enchere enchere, Utilisateur utilisateur) throws DalException{
 			
-			ArrayList<Enchere> listEnchere = new ArrayList<Enchere>();
+			List<Enchere> listEnchere = new ArrayList<Enchere>();
 			
 			try(Connection cnx = ConnectionProvider.getConnection()) {
 				String SELECTBYUSER = "select * from ENCHERES where no_utilisateur=?";
 				PreparedStatement stmt = cnx.prepareStatement(SELECTBYUSER);
-				stmt.setInt(1, utilisateur.getNoUtilisateur());
-				
+				stmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+					
 				stmt.execute();
 				ResultSet rs = stmt.getResultSet();
 				while (rs.next()) {
-					//ArticleVendu art = new ArticleVendu();
-					 listEnchere.add(rs.getInt("no_article"), null) ;
-			
-
-				}		
+					listEnchere.add( rs.getInt("no_utilisateur"), enchere);
+					
+				}				
 			}        
 				
-				
-			catch(Exception e){
+			catch(Exception e) {
 				DalException dalException = new DalException();
 	            dalException.addError(ErrorCodesDAL.ERROR_SQL_SELECT);
 	            throw dalException;
