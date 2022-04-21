@@ -12,14 +12,13 @@ public class ArticleVendu {
 	private int miseAPrix;
 	private int prixVente;
 	private String etatVente; // (EC: En Cours / ND : Non Débutée / Terminée : TR )
-	private Retrait lieuRetrait;
 	private ArrayList<Enchere> listeEnchere;
 	private Utilisateur utilisateur;
 	private Categorie categorie;
 	private Retrait retrait;
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait,
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente,
 			Utilisateur utilisateur, Categorie categorie, Retrait retrait) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -29,14 +28,13 @@ public class ArticleVendu {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
-		this.lieuRetrait = lieuRetrait;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
 		this.setRetrait(retrait);
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
-			int miseAPrix, int prixVente, String etatVente, Retrait lieuRetrait, Utilisateur utilisateur,
+			int miseAPrix, int prixVente, String etatVente, Utilisateur utilisateur,
 			Categorie categorie, Retrait retrait) {
 
 		this.nomArticle = nomArticle;
@@ -46,7 +44,6 @@ public class ArticleVendu {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
-		this.lieuRetrait = lieuRetrait;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
 		this.setRetrait(retrait);
@@ -126,14 +123,6 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 
-	public Retrait getLieuRetrait() {
-		return lieuRetrait;
-	}
-
-	public void setLieuRetrait(Retrait lieuRetrait) {
-		this.lieuRetrait = lieuRetrait;
-	}
-
 	public ArrayList<Enchere> getListeEnchere() {
 		return listeEnchere;
 	}
@@ -170,8 +159,7 @@ public class ArticleVendu {
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
-				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", lieuRetrait=" + lieuRetrait
-				+ ", listeEnchere=" + listeEnchere + ", utilisateur=" + utilisateur + ", categorie=" + categorie + "]";
+				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", lieuRetrait=" + ", listeEnchere=" + listeEnchere + ", utilisateur=" + utilisateur + ", categorie=" + categorie + "]";
 	}
 
 
