@@ -40,18 +40,18 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			String INSERT = "INSERT INTO ARTICLES_VENDUS "
-					+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, etat_vente, no_utilisateur, no_categorie) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, etat_vente, no_utilisateur, no_categorie,no_retrait) "
+					+ "VALUES (?, ?, ?, ?, ?,  ?, ?, ?,?)";
 			PreparedStatement stmt = cnx.prepareStatement(INSERT);
 			stmt.setString(1, articleVendu.getNomArticle());
 			stmt.setString(2, articleVendu.getDescription());
 			stmt.setDate(3, Date.valueOf(articleVendu.getDateDebutEncheres()));
 			stmt.setDate(4, Date.valueOf(articleVendu.getDateFinEncheres()));
 			stmt.setInt(5, articleVendu.getMiseAPrix());
-			stmt.setInt(6, articleVendu.getPrixVente());
-			stmt.setString(7, articleVendu.getEtatVente());
-			stmt.setInt(8, articleVendu.getUtilisateur().getNoUtilisateur());
-			stmt.setInt(9, articleVendu.getCategorie().getNoCategorie());
+			stmt.setString(6, articleVendu.getEtatVente());
+			stmt.setInt(7, articleVendu.getUtilisateur().getNoUtilisateur());
+			stmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
+			stmt.setInt(8, articleVendu.getRetrait().getNoRetrait());
 			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
@@ -266,10 +266,10 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			stmt.setDate(3, Date.valueOf(articleVendu.getDateDebutEncheres()));
 			stmt.setDate(4, Date.valueOf(articleVendu.getDateFinEncheres()));
 			stmt.setInt(5, articleVendu.getMiseAPrix());
-			stmt.setInt(6, articleVendu.getPrixVente());
-			stmt.setString(7, articleVendu.getEtatVente());
-			stmt.setInt(8, articleVendu.getUtilisateur().getNoUtilisateur());
-			stmt.setInt(9, articleVendu.getCategorie().getNoCategorie());
+			stmt.setString(6, articleVendu.getEtatVente());
+			stmt.setInt(7, articleVendu.getUtilisateur().getNoUtilisateur());
+			stmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
+			stmt.setInt(8, articleVendu.getRetrait().getNoRetrait());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
