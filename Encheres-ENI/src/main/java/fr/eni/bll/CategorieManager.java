@@ -45,4 +45,12 @@ public class CategorieManager {
 		}
 		return listeCategorie;
 	}
+	
+	public void selectById(int id) throws DalException {
+		try {
+			this.daoCategorie.selectById(id);
+		} catch (DalException e) {
+			e.printStackTrace();
+		}
+	}
 }
