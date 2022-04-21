@@ -10,7 +10,7 @@ import java.util.List;
 
 import fr.eni.bo.Retrait;
 
-public class RetraitDAOJdbcImpl implements DAO<Retrait>{
+public class RetraitDAOJdbcImpl implements DAORetrait{
 
 
     public void insert(Retrait retrait) throws DalException {
