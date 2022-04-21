@@ -41,7 +41,6 @@ public class ServletEncheres extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			System.out.println("Content ?");
 			listeArticle = this.articleManager.selectAll();
 			listeCategorie = this.categorieManager.selectAll();
 			request.setAttribute("listeArticle", listeArticle);
