@@ -9,12 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.bll.UserManager;
-import fr.eni.bo.ArticleVendu;
 import fr.eni.bo.Utilisateur;
-import fr.eni.dal.DAOEnchere;
-import fr.eni.dal.DAOFactory;
-import fr.eni.dal.DalException;
-import fr.eni.messages.Message;
 
 /**
  * Servlet implementation class ServletNewprofile
