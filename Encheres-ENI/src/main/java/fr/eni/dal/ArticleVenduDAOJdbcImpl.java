@@ -267,7 +267,7 @@ public class ArticleVenduDAOJdbcImpl implements DAOArticleVendu {
 			stmt.setDate(3, Date.valueOf(articleVendu.getDateDebutEncheres()));
 			stmt.setDate(4, Date.valueOf(articleVendu.getDateFinEncheres()));
 			stmt.setInt(5, articleVendu.getMiseAPrix());
-			stmt.setInt(6, articleVendu.getPrixVente()0);
+			stmt.setInt(6, articleVendu.getPrixVente());
 			stmt.setString(6, articleVendu.getEtatVente());
 			stmt.setInt(7, articleVendu.getUtilisateur().getNoUtilisateur());
 			stmt.setInt(8, articleVendu.getCategorie().getNoCategorie());
