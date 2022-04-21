@@ -4,15 +4,24 @@ public class Retrait {
 	private String rue;
 	private String code_postal;
 	private String ville;
-	
+	private int no_retrait;
+
+	public Retrait(String rue, String code_postal, String ville, int no_retrait) {
+		super();
+		this.rue = rue;
+		this.code_postal = code_postal;
+		this.ville = ville;
+		this.no_retrait = no_retrait;
+	}
+
 	public Retrait(String rue, String code_postal, String ville) {
 		this.rue = rue;
 		this.code_postal = code_postal;
 		this.ville = ville;
 	}
-	
+
 	public Retrait() {
-		
+
 	}
 
 	public String getRue() {
@@ -39,10 +48,17 @@ public class Retrait {
 		this.ville = ville;
 	}
 
-		@Override
+	public int getNo_retrait() {
+		return no_retrait;
+	}
+
+	public void setNo_retrait(int no_retrait) {
+		this.no_retrait = no_retrait;
+	}
+
+	@Override
 	public String toString() {
 		return "Retrait [rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + "]";
 	}
 
-	
 }

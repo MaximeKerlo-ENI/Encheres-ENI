@@ -27,7 +27,7 @@ public class UserManager {
 		}
 	}
 	
-	void delete(Utilisateur utilisateur) throws DalException {
+	public void delete(Utilisateur utilisateur) throws DalException {
 		try {
 			this.daoUtilisateur.delete(utilisateur);
 		} catch (DalException e) {

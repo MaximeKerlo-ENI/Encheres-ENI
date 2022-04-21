@@ -18,7 +18,6 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
         try (Connection cnx = ConnectionProvider.getConnection()){
             String INSERT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = cnx.prepareStatement(INSERT);
-       
             stmt.setString(2, retrait.getRue());
             stmt.setString(3, retrait.getCode_postal());
             stmt.setString(4, retrait.getVille());
@@ -41,7 +40,6 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
             stmt.setString(1, retrait.getRue());
             stmt.setString(2, retrait.getCode_postal());
             stmt.setString(3, retrait.getVille());
-     
             stmt.executeUpdate();
             
         } catch (SQLException e) {
@@ -57,7 +55,6 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
         String DELETE = "DELETE FROM RETRAITS WHERE no_article = ? ";
         try (Connection cnx = ConnectionProvider.getConnection()){
             PreparedStatement stmt = cnx.prepareStatement(DELETE);
-           
             stmt.executeUpdate();
          
         } catch (SQLException e) {
@@ -116,14 +113,6 @@ public class RetraitDAOJdbcImpl implements DAO<Retrait>{
 	        }
 	        return retrait;
 	    }
-
-
-
-
-
-
-  
-  
     }
 
 	

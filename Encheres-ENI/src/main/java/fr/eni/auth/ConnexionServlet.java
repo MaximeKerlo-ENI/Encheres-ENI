@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.bll.UserManager;
 import fr.eni.bo.Utilisateur;
+import fr.eni.dal.DalException;
 
 
 @WebServlet("/connexion")
@@ -40,7 +41,13 @@ public class ConnexionServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		// 2 - on va chercher dans notre base d'utilisateur si un utilisateur correspond
-		Utilisateur utilisateur = userManager.selectPseudoPwd(username, password);
+		Utilisateur utilisateur = null;
+		try {
+			utilisateur = userManager.selectPseudoPwd(username, password);
+		} catch (DalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		// si jamais utilisateur non trouvé
 		if (utilisateur == null) {
@@ -53,7 +60,7 @@ public class ConnexionServlet extends HttpServlet {
 			// l'objet HttpSession est le même dans TOUS les servlets de l'application, mais différent pour chaque utilisateur
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateurConnecte", utilisateur);
-			response.sendRedirect("./");
+			request.getRequestDispatcher("/").forward(request, response);
 		}
 	}
 }

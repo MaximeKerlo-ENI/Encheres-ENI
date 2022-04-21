@@ -4,7 +4,7 @@
 <html>
 <jsp:include page="./WEB-INF/include/head.jsp">
 	<jsp:param name="titre" value="Accueil" />
-</jsp:include>
+</jsp:include> 
 <body>
 	<div class="row ms-5 mt-3">
 		<div class="col-6">
@@ -30,9 +30,10 @@
 		</div><br>
 		<label>Catégorie : </label>
 		<select class="form-select" aria-label="Default select example">
-			<!-- foreach -->
-			<option>${libelle}</option>
-			<!-- fin foreach -->
+			<option selected>Toutes</option>
+			<c:forEach var="categorie" items="${listeCategorie}">
+				<option>${categorie.libelle}</option>
+			</c:forEach>
 		</select>				
 	</div>
 	<div class="container col-5">
@@ -102,21 +103,21 @@
 		</c:otherwise>
 		</c:choose>	
 	</section>
-	<br>
-	<div class="row container">
-	<c:forEach var="article" items="${listeArticles}"></c:forEach>
-		<div class="col-6 mb-3">
-			<div class="card">
-				<div class="card-body">
-				 	<img class="card-img-top" src="..."><br>
-					<label><b>${article.nomArticle}</b></label><br>
-					<label>Prix : </label><label>${article.prix}</label><br>
-					<label>Fin de l'enchère : </label><label>${article.dateFin}</label><br>
-					<label>Vendeur : </label><a href=""><label>${article.vendeur}</label></a>
+	<br>	
+ 	<div class="row container">
+		<c:forEach var="article" items="${listeArticle}">
+			<div class="col-6 mb-3">
+				<div class="card">
+					<div class="card-body">
+						 <img class="card-img-top" src="..."><br>
+						<label><b>${article.nomArticle}</b></label><br>
+						<label>Prix : </label><label>${article.miseAPrix}</label><br>
+						<label>Fin de l'enchère : </label><label>${article.dateFinEncheres}</label><br>
+						<label>Vendeur : </label><a href=""><label>${article.utilisateur.pseudo}</label></a>
+					</div>
 				</div>
 			</div>
-		</div>
-		<!-- fin foreach -->
+		</c:forEach>
 	</div>
 </body>
 </html>
