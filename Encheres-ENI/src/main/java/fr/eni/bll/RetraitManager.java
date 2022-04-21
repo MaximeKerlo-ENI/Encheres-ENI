@@ -9,7 +9,7 @@ import fr.eni.dal.DalException;
 
 public class RetraitManager {
 
-	private DAORetrait daoRetrait = DAOFactory.getDAORetrait();
+	private DAORetrait daoRetrait = (DAORetrait) DAOFactory.getDAORetrait();
 
 	public void insert(Retrait retrait) throws DalException {
 		try {
