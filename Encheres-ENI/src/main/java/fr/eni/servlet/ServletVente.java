@@ -27,22 +27,25 @@ import fr.eni.dal.DalException;
 @WebServlet("/ServletVente")
 public class ServletVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      
-	private CategorieManager categorieManager = new CategorieManager();	
+
+	private CategorieManager categorieManager = new CategorieManager();
 	private RetraitManager retraitManager = new RetraitManager();
 	private List<Categorie> listeCategorie = new ArrayList<Categorie>();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletVente() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ServletVente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			listeCategorie = this.categorieManager.selectAll();
 			request.setAttribute("listeCategorie", listeCategorie);
@@ -54,11 +57,13 @@ public class ServletVente extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
+
 		Categorie categorie = null;
 		try {
 			categorie = this.categorieManager.selectById(Integer.valueOf(request.getParameter("categorie")));
@@ -69,45 +74,34 @@ public class ServletVente extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		String etat = "";
 		LocalDate dateDebut = Date.valueOf(request.getParameter("start")).toLocalDate();
-		if(dateDebut.getDayOfYear() > LocalDate.now().getDayOfYear()) {
+		if (dateDebut.getDayOfYear() > LocalDate.now().getDayOfYear()) {
 			etat = "ND";
-		}else{
+		} else {
 			etat = "EC";
 		}
-		
+
 		Utilisateur userSession = (Utilisateur) session.getAttribute("utilisateurConnecte");
-		
-		Retrait retraitInsert = new Retrait(
-				request.getParameter("rue"),
-				request.getParameter("cpo"),
-				request.getParameter("ville")
-				);
-		
+
+		Retrait retraitInsert = new Retrait(request.getParameter("rue"), request.getParameter("cpo"),
+				request.getParameter("ville"));
+
 		try {
 			this.retraitManager.insert(retraitInsert);
 		} catch (DalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		Retrait retraitArticle = null;
-		//retraitArticle = this.retraitManager.selectbyId();
-		
-		ArticleVendu article = new ArticleVendu(
-				request.getParameter("nom"),
-				request.getParameter("description"),			
-				dateDebut,
-				Date.valueOf(request.getParameter("end")).toLocalDate(),
-				Integer.valueOf(request.getParameter("price")),
-				Integer.valueOf(request.getParameter("price")),
-				etat,
-				userSession,
-				categorie,
-				retraitInsert
-				);
+		// retraitArticle = this.retraitManager.selectbyId();
+
+		ArticleVendu article = new ArticleVendu(request.getParameter("nom"), request.getParameter("description"),
+				dateDebut, Date.valueOf(request.getParameter("end")).toLocalDate(),
+				Integer.valueOf(request.getParameter("price")), Integer.valueOf(request.getParameter("price")), etat,
+				userSession, categorie, retraitInsert);
 	}
 
 }
