@@ -18,8 +18,8 @@ public class ArticleVendu {
 	private Retrait retrait;
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente,
-			Utilisateur utilisateur, Categorie categorie, Retrait retrait) {
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Utilisateur utilisateur,
+			Categorie categorie, Retrait retrait) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -34,8 +34,22 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
-			int miseAPrix, int prixVente, String etatVente, Utilisateur utilisateur,
-			Categorie categorie, Retrait retrait) {
+			int miseAPrix, int prixVente, String etatVente, Utilisateur utilisateur, Categorie categorie) {
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+
+	}
+
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+			int miseAPrix, int prixVente, String etatVente, Utilisateur utilisateur, Categorie categorie,
+			Retrait retrait) {
 
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -159,8 +173,8 @@ public class ArticleVendu {
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
-				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", lieuRetrait=" + ", listeEnchere=" + listeEnchere + ", utilisateur=" + utilisateur + ", categorie=" + categorie + "]";
+				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", lieuRetrait="
+				+ ", listeEnchere=" + listeEnchere + ", utilisateur=" + utilisateur + ", categorie=" + categorie + "]";
 	}
-
 
 }
